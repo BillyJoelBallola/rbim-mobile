@@ -1,0 +1,66 @@
+import { useContext, useState } from 'react'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { SurveyFormContext } from '../../context/SurveryFormContext'
+
+import CustomTitle from '../CustomTitle'
+import HeightSpacer from '../spacer/HeightSpacer'
+import Divider from '../Divider'
+import CustomInput from '../CustomInput'
+import CustomButton from '../CustomButton'
+import TextQuestion from '../TextQuestion'
+
+const QuestionsPart5 = ({ setActiveScreen }) => {
+  const { membersData, handleInputChange } = useContext(SurveyFormContext)
+  const [q10Answer, setQ10Answer] = useState(null)
+
+  return (
+    <ScrollView>
+      <CustomTitle text={'A. DEMOGRAPHIC CHARACTERISTICS'} size={16}/>
+      <CustomTitle text={'FOR ALL HOUSEHOLD MEMEBERS'} fgColor={'#008605'} size={14}/>
+      <HeightSpacer size={20}/>
+      <View style={styles.column}>
+        <View style={{ width: '15%' }}>
+          <Text>No. of HH members</Text>
+        </View>
+        <View style={{ width: '80%' }}>
+          <TextQuestion questionNo={'Q10'} questionText={" What is __'s ethnicity or is __ a Tagalog, Bicolano, Bisaya, etc?"}/>
+        </View>
+      </View>
+
+      {
+      membersData &&
+        membersData.map((member, idx) => (
+          <View key={idx}>
+            <HeightSpacer size={10}/>
+            <Divider />
+            <HeightSpacer size={10}/>
+            <View style={styles.column}>
+              <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
+                <Text>#{idx + 1}</Text>
+              </View>
+              <View style={{ width: '80%' }}>
+                <CustomInput value={member.questionsAndAnswer[9]?.response} setValue={(value) => handleInputChange(9, { question: 'Q10', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)} placeholder={"Type here"}/>
+              </View>
+            </View>
+          </View>
+        ))
+      }
+
+      <HeightSpacer size={20}/>
+      <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
+      <HeightSpacer size={10}/>
+      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => setActiveScreen(current => current - 1)} />
+    </ScrollView>
+  )
+}
+
+const styles = StyleSheet.create({
+  column: {
+    flex: 3,
+    gap: 5,
+    width: '100%',
+    flexDirection: 'row'
+  }
+})
+
+export default QuestionsPart5

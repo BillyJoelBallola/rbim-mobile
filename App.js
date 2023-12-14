@@ -1,20 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { QuestionsContextProvider } from './src/context/QuestionsContext';
+import { SurveyFormContextProvider } from './src/context/SurveryFormContext'
+
+import LoginScreen from './src/screens/LoginScreen'
+import HomeScreen from './src/screens/HomeScreen'
+import SurveyFormScreen from './src/screens/SurveyFormScreen'
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SurveyFormContextProvider>
+      <QuestionsContextProvider>
+        <SafeAreaView style={styles.root} >
+          <SurveyFormScreen />
+        </SafeAreaView>
+      </QuestionsContextProvider>
+    </SurveyFormContextProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    backgroundColor: '#F1F1F1'
+  }
 });
