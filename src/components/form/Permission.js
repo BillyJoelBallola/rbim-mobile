@@ -16,7 +16,11 @@ const Permission = ({ checked, setChecked, setActiveScreen }) => {
         <CustomCheckBox setChecked={setChecked} checked={checked} label={"Pinahihintulutan ang panayam"}/>
         <CustomButton text={'NEXT'} onPress={() => checked ? setActiveScreen(current => current + 1) : alert('Unable to continue to survey form') }/>
         <HeightSpacer size={10} />
-        <CustomButton text={'CANCEL'} bgColor={"#808080"}/>
+        <CustomButton 
+          href={'/HomeScreen'} 
+          text={'CANCEL'} 
+          bgColor={"#808080"}
+        />
       </View>
     </View>
   )

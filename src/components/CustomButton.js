@@ -1,25 +1,48 @@
 import { Text, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
+import { Link } from 'expo-router'
 
-const CustomButton = ({ text, onPress, bgColor, fgColor, bColor }) => {
+const CustomButton = ({ text, onPress, bgColor, fgColor, bColor, href = null }) => {
   return (
-    <TouchableOpacity 
-      style={[
-        styles.container,
-        bgColor ? { backgroundColor: bgColor } : {},
-        bColor ? { borderColor: bColor } : { borderColor: 'transparent' }
-      ]} 
-      onPress={onPress}
-    >
-      <Text 
-        style={[
-          styles.text,
-          fgColor ? { color: fgColor } : {}
-        ]}
-      >
-        {text}
-      </Text>
-    </TouchableOpacity>
+    <>
+      {
+        href ? 
+        <Link 
+          href={href}
+          style={[
+            styles.container,
+            bgColor ? { backgroundColor: bgColor } : {},
+            bColor ? { borderColor: bColor } : { borderColor: 'transparent' }
+          ]} 
+        >
+          <Text 
+            style={[
+              styles.text,
+              fgColor ? { color: fgColor } : {}
+            ]}
+          >
+            {text}
+          </Text>
+        </Link>
+        : <TouchableOpacity 
+          style={[
+            styles.container,
+            bgColor ? { backgroundColor: bgColor } : {},
+            bColor ? { borderColor: bColor } : { borderColor: 'transparent' }
+          ]} 
+          onPress={onPress}
+        >
+          <Text 
+            style={[
+              styles.text,
+              fgColor ? { color: fgColor } : {}
+            ]}
+          >
+            {text}
+          </Text>
+        </TouchableOpacity>
+      }
+    </>
   )
 }
 

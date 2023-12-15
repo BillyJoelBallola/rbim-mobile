@@ -45,28 +45,33 @@ const QuestionsPart13 = ({ setActiveScreen }) => {
         membersData &&
         membersData.map((member, idx) => (
           <View key={idx}>
-            <HeightSpacer size={10}/>
-            <Divider />
-            <HeightSpacer size={10}/>
-            <View style={styles.column}>
-              <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
-                <Text>#{idx + 1}</Text>
-              </View>
-              <View style={{ width: '40%' }}>
-                <CustomInput
-                  value={member.questionsAndAnswer[21]?.response}
-                  setValue={value => handleInputChange(21, { question: 'Q22', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-                  placeholder={'Type here'}
-                />
-              </View>
-              <View style={{ width: '40%' }}>
-                <CustomDropdown
-                  selected={member.questionsAndAnswer[22]?.response}
-                  onSelect={value => handleInputChange(22, { question: 'Q23', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-                  data={question23Data.responses}
-                />
-              </View>
-            </View>
+            {
+              member.questionsAndAnswer.length > 0 &&
+              <>
+                <HeightSpacer size={10}/>
+                <Divider />
+                <HeightSpacer size={10}/>
+                <View style={styles.column}>
+                  <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>#{idx + 1}</Text>
+                  </View>
+                  <View style={{ width: '40%' }}>
+                    <CustomInput
+                      value={member.questionsAndAnswer[21]?.response}
+                      setValue={value => handleInputChange(21, { question: 'Q22', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      placeholder={'Type here'}
+                    />
+                  </View>
+                  <View style={{ width: '40%' }}>
+                    <CustomDropdown
+                      selected={member.questionsAndAnswer[22]?.response}
+                      onSelect={value => handleInputChange(22, { question: 'Q23', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      data={question23Data.responses}
+                    />
+                  </View>
+                </View>
+              </>
+            }
           </View>
         ))
       }

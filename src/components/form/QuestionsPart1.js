@@ -38,20 +38,25 @@ const QuestionsPart1 = ({ setActiveScreen }) => {
         membersData &&
         membersData.map((member, idx) => (
           <View key={idx}>
-            <HeightSpacer size={10}/>
-            <Divider />
-            <HeightSpacer size={10}/>
-            <View style={styles.column}>
-              <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
-                <Text>#{idx + 1}</Text>
-              </View>
-              <View style={{ width: '40%' }}>
-                <CustomDropdown data={questionTwoData.responses} selected={member.questionsAndAnswer[1]?.response} onSelect={(value) => handleInputChange(1, { question: 'Q2', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}/>
-              </View>
-              <View style={{ width: '40%' }}>
-                <CustomDropdown data={questionThreeData.responses} selected={member.questionsAndAnswer[2]?.response} onSelect={(value) => handleInputChange(2, { question: 'Q3', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}/>
-              </View>
-            </View>
+            {
+              member.questionsAndAnswer.length > 0 &&
+              <>
+                <HeightSpacer size={10}/>
+                <Divider />
+                <HeightSpacer size={10}/>
+                <View style={styles.column}>
+                  <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>#{idx + 1}</Text>
+                  </View>
+                  <View style={{ width: '40%' }}>
+                    <CustomDropdown data={questionTwoData.responses} selected={member.questionsAndAnswer[1]?.response} onSelect={(value) => handleInputChange(1, { question: 'Q2', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}/>
+                  </View>
+                  <View style={{ width: '40%' }}>
+                    <CustomDropdown data={questionThreeData.responses} selected={member.questionsAndAnswer[2]?.response} onSelect={(value) => handleInputChange(2, { question: 'Q3', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}/>
+                  </View>
+                </View>
+              </>
+            }
           </View>
         ))
       }

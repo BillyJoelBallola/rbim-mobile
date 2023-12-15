@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 
@@ -11,7 +11,6 @@ import TextQuestion from '../TextQuestion'
 
 const QuestionsPart5 = ({ setActiveScreen }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
-  const [q10Answer, setQ10Answer] = useState(null)
 
   return (
     <ScrollView>
@@ -31,17 +30,22 @@ const QuestionsPart5 = ({ setActiveScreen }) => {
       membersData &&
         membersData.map((member, idx) => (
           <View key={idx}>
-            <HeightSpacer size={10}/>
-            <Divider />
-            <HeightSpacer size={10}/>
-            <View style={styles.column}>
-              <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
-                <Text>#{idx + 1}</Text>
-              </View>
-              <View style={{ width: '80%' }}>
-                <CustomInput value={member.questionsAndAnswer[9]?.response} setValue={(value) => handleInputChange(9, { question: 'Q10', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)} placeholder={"Type here"}/>
-              </View>
-            </View>
+            {
+              member.questionsAndAnswer.length > 0 &&
+              <>
+                <HeightSpacer size={10}/>
+                <Divider />
+                <HeightSpacer size={10}/>
+                <View style={styles.column}>
+                  <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>#{idx + 1}</Text>
+                  </View>
+                  <View style={{ width: '80%' }}>
+                    <CustomInput value={member.questionsAndAnswer[9]?.response} setValue={(value) => handleInputChange(9, { question: 'Q10', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)} placeholder={"Type here"}/>
+                  </View>
+                </View>
+              </>
+            }
           </View>
         ))
       }

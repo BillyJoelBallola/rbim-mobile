@@ -44,28 +44,33 @@ const QuestionsPart21 = ({ setActiveScreen }) => {
         membersData &&
         membersData.map((member, idx) => (
           <View key={idx}>
-            <HeightSpacer size={10}/>
-            <Divider />
-            <HeightSpacer size={10}/>
-            <View style={styles.column}>
-              <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
-                <Text>#{idx + 1}</Text>
-              </View>
-              <View style={{ width: '40%' }}>
-                <CustomInput 
-                  value={member.questionsAndAnswer[34]?.response}
-                  setValue={value => handleInputChange(34, { question: 'Q35', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-                  placeholder={'Type here'}
-                />
-              </View>
-              <View style={{ width: '40%' }}>
-                <CustomInput 
-                  value={member.questionsAndAnswer[35]?.response}
-                  setValue={value => handleInputChange(35, { question: 'Q36', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-                  placeholder={'Type here'}
-                />
-              </View>
-            </View>
+            {
+              member.questionsAndAnswer.length > 0 &&
+              <>
+                <HeightSpacer size={10}/>
+                <Divider />
+                <HeightSpacer size={10}/>
+                <View style={styles.column}>
+                  <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>#{idx + 1}</Text>
+                  </View>
+                  <View style={{ width: '40%' }}>
+                    <CustomInput 
+                      value={member.questionsAndAnswer[34]?.response}
+                      setValue={value => handleInputChange(34, { question: 'Q35', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      placeholder={'Type here'}
+                    />
+                  </View>
+                  <View style={{ width: '40%' }}>
+                    <CustomInput 
+                      value={member.questionsAndAnswer[35]?.response}
+                      setValue={value => handleInputChange(35, { question: 'Q36', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      placeholder={'Type here'}
+                    />
+                  </View>
+                </View>
+              </>
+            }
           </View>
         ))
       }

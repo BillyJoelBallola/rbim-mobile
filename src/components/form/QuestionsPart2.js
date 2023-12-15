@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 
@@ -34,27 +34,32 @@ const QuestionsPart2 = ({ setActiveScreen }) => {
         membersData && 
         membersData.map((member, index) => (
         <View key={index}>
-          <HeightSpacer size={10}/>
-          <Divider />
-          <HeightSpacer size={10}/>
-          <View style={styles.column}>
-            <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
-              <Text>{`#${index + 1}`}</Text>
-            </View>
-            <View style={{ width: '40%' }}>
-              <CustomInput
-                placeholder={"Type here"}
-                value={member.questionsAndAnswer[3]?.response}
-                setValue={(value) => handleInputChange(3, { question: `Q4`, response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-              />
-            </View>
-            <View style={{ width: '40%' }}>
-              <CustomDatePicker
-                selectedDate={member.questionsAndAnswer[4]?.response}
-                onDateChange={(value) => handleInputChange(4, { question: `Q5`, response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-              />
-            </View>
-          </View>
+          {
+            member.questionsAndAnswer.length > 0 &&
+            <>
+              <HeightSpacer size={10}/>
+              <Divider />
+              <HeightSpacer size={10}/>
+              <View style={styles.column}>
+                <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
+                  <Text>{`#${index + 1}`}</Text>
+                </View>
+                <View style={{ width: '40%' }}>
+                  <CustomInput
+                    placeholder={"Type here"}
+                    value={member.questionsAndAnswer[3]?.response}
+                    setValue={(value) => handleInputChange(3, { question: `Q4`, response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                  />
+                </View>
+                <View style={{ width: '40%' }}>
+                  <CustomDatePicker
+                    selectedDate={member.questionsAndAnswer[4]?.response}
+                    onDateChange={(value) => handleInputChange(4, { question: `Q5`, response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                  />
+                </View>
+              </View>
+            </>
+          }
         </View>
       ))}
   

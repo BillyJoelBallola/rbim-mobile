@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const CustomDatePicker = ({ selectedDate, onDateChange }) => {
+const CustomDatePicker = ({ selectedDate, onDateChange, mode = 'date' }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const showDatePickerHandler = () => {
@@ -18,18 +18,33 @@ const CustomDatePicker = ({ selectedDate, onDateChange }) => {
     onDateChange(selected);
   };
 
+  const DisplayText = () => {
+    switch (mode) {
+      case 'date':
+        return selectedDate ?
+        selectedDate.toDateString() : 
+        'Select Date'
+      case 'time':
+        return selectedDate ?
+        selectedDate.toLocaleString('en-US').substring(12,24) : 
+        'Select Time'
+      default:
+        break;
+    }
+  }
+
   return (
     <View>
       <TouchableOpacity onPress={showDatePickerHandler}>
         <Text style={styles.datePickerText}>
-          {selectedDate ? selectedDate.toDateString() : 'Select Date'}
+          <DisplayText />
         </Text>
       </TouchableOpacity>
 
       {showDatePicker && (
         <DateTimePicker
           value={selectedDate || new Date()}
-          mode="date"
+          mode={mode}
           onChange={onDateChangeHandler}
         />
       )}

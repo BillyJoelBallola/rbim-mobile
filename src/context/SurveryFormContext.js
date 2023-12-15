@@ -56,7 +56,7 @@ export const SurveyFormContextProvider = ({ children }) => {
     onChange(newArray);
   } 
 
-  console.log(questionsAndAnswerMember1);
+  // console.log(JSON.stringify(surveyForm, null, 2));
 
   const membersData = [
     { questionsAndAnswer: questionsAndAnswerMember1, setQuestionAndAnswer: setQuestionAndAnswerMember1 },
@@ -77,7 +77,9 @@ export const SurveyFormContextProvider = ({ children }) => {
         setHousehold, 
         household,
         handleInputChange,
-        membersData
+        membersData,
+        surveyForm,
+        setSurveyForm
       }}
     >
       {children}

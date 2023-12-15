@@ -11,7 +11,7 @@ export default function App() {
     <SurveyFormContextProvider>
       <QuestionsContextProvider>
         <SafeAreaView style={styles.root} >
-          <SurveyFormScreen />
+          <HomeScreen />
         </SafeAreaView>
       </QuestionsContextProvider>
     </SurveyFormContextProvider>

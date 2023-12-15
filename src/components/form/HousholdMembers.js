@@ -16,7 +16,7 @@ const HousholdMembers = ({ setActiveScreen }) => {
       <CustomTitle text={'A. DEMOGRAPHIC CHARACTERISTICS'} size={16}/>
       <CustomTitle text={'FOR ALL HOUSEHOLD MEMEBERS'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>
-      <TextQuestion questionNo={'Q1:'} questionText={'Who are the members of this household starting from the HH Head?'}/>
+      <TextQuestion questionNo={'Q1'} questionText={'Who are the members of this household starting from the HH Head?'}/>
       
       {
         membersData &&

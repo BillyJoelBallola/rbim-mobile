@@ -37,21 +37,26 @@ const QuestionsPart18 = ({ setActiveScreen }) => {
         membersData &&
         membersData.map((member, idx) => (
           <View key={idx}>
-            <HeightSpacer size={10}/>
-            <Divider />
-            <HeightSpacer size={10}/>
-            <View style={styles.column}>
-              <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
-                <Text>#{idx + 1}</Text>
-              </View>
-              <View style={{ width: '80%' }}>
-                <CustomDropdown
-                  selected={member.questionsAndAnswer[30]?.response}
-                  onSelect={value => handleInputChange(30, { question: 'Q31', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-                  data={question31Data.responses}
-                />
-              </View>
-            </View>
+            {
+              member.questionsAndAnswer.length > 0 &&
+              <>
+                <HeightSpacer size={10}/>
+                <Divider />
+                <HeightSpacer size={10}/>
+                <View style={styles.column}>
+                  <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>#{idx + 1}</Text>
+                  </View>
+                  <View style={{ width: '80%' }}>
+                    <CustomDropdown
+                      selected={member.questionsAndAnswer[30]?.response}
+                      onSelect={value => handleInputChange(30, { question: 'Q31', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      data={question31Data.responses}
+                    />
+                  </View>
+                </View>
+              </>
+            }
           </View>
         ))
       }

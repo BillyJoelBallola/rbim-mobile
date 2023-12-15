@@ -15,7 +15,7 @@ const QuestionsPart16 = ({ setActiveScreen }) => {
   const { questions } = useContext(QuestionsContext)
 
   const question28Data = questions['Q28']
-  // const question29Data = questions['Q29']
+  const question29Data = questions['Q29']
 
   return (
     <ScrollView>
@@ -34,8 +34,8 @@ const QuestionsPart16 = ({ setActiveScreen }) => {
         </View>
         <View style={{ width: '40%' }}>
           <TextQuestion
-            questionNo={'Q29'}
-            questionText={'Is there a member of the HH that has any disability? What is the disability?'}
+            questionNo={question29Data.questionCode}
+            questionText={question29Data.questionText}
           />
         </View>
       </View>
@@ -44,24 +44,33 @@ const QuestionsPart16 = ({ setActiveScreen }) => {
         membersData &&
         membersData.map((member, idx) => (
           <View key={idx}>
-            <HeightSpacer size={10}/> 
-            <Divider />
-            <HeightSpacer size={10}/>
-            <View style={styles.column}>
-              <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
-                <Text>#{idx + 1}</Text>
-              </View>
-              <View style={{ width: '40%' }}>
-                <CustomDropdown
-                  selected={member.questionsAndAnswer[27]?.response}
-                  onSelect={value => handleInputChange(27, { question: 'Q28', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-                  data={question28Data.responses}
-                />
-              </View>
-              <View style={{ width: '40%' }}>
-                <CustomDropdown data={['option1', 'option2']}/>
-              </View>
-            </View>
+            {
+              member.questionsAndAnswer.length > 0 &&
+              <>
+                <HeightSpacer size={10}/> 
+                <Divider />
+                <HeightSpacer size={10}/>
+                <View style={styles.column}>
+                  <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
+                    <Text>#{idx + 1}</Text>
+                  </View>
+                  <View style={{ width: '40%' }}>
+                    <CustomDropdown
+                      selected={member.questionsAndAnswer[27]?.response}
+                      onSelect={value => handleInputChange(27, { question: 'Q28', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      data={question28Data.responses}
+                    />
+                  </View>
+                  <View style={{ width: '40%' }}>
+                    <CustomDropdown 
+                      selected={member.questionsAndAnswer[28]?.response}
+                      onSelect={value => handleInputChange(28, { question: 'Q29', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      data={question29Data.responses}
+                    />
+                  </View>
+                </View>
+              </>
+            }
           </View>
         ))
       }
