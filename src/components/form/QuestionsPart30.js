@@ -20,13 +20,13 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
       <HeightSpacer size={20}/>
 
       <View style={styles.column}>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <TextQuestion 
             questionNo={'Visit'}
             questionText={'1st Visit'}
           />
         </View>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <TextQuestion 
             questionNo={'Visit'}
             questionText={'2nd Visit'}
@@ -45,13 +45,13 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <View style={styles.column}>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDatePicker 
             selectedDate={surveyForm?.first_visit_date}
             onDateChange={value => setSurveyForm(current => ({...current, first_visit_date: value}))}
           />
         </View>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDatePicker 
             selectedDate={surveyForm?.second_visit_date}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_date: value}))}
@@ -70,14 +70,14 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <View style={styles.column}>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDatePicker 
             selectedDate={surveyForm?.first_visit_time_start}
             onDateChange={value => setSurveyForm(current => ({...current, first_visit_time_start: value}))}
             mode={'time'}
           />
         </View>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDatePicker 
             selectedDate={surveyForm?.second_visit_time_start}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_time_start: value}))}
@@ -96,14 +96,14 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <View style={styles.column}>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDatePicker 
             selectedDate={surveyForm?.first_visit_time_end}
             onDateChange={value => setSurveyForm(current => ({...current, first_visit_time_end: value}))}
             mode={'time'}
           />
         </View>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDatePicker 
             selectedDate={surveyForm?.second_visit_time_end}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_time_end: value}))}
@@ -122,14 +122,14 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <View style={styles.column}>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDropdown 
             selected={surveyForm?.first_visit_result}
             onSelect={value => setSurveyForm(current => ({...current, first_visit_result: value}))}
             data={[{ responseCode: 'C', responseText: 'Completed' }, { responseCode: 'CB', responseText: 'Callback' }, { responseCode: 'R', responseText: 'Refused' }]}
           />
         </View>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDropdown 
             selected={surveyForm?.second_visit_result}
             onSelect={value => setSurveyForm(current => ({...current, second_visit_result: value}))}
@@ -149,13 +149,13 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <View style={styles.column}>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDatePicker 
             selectedDate={surveyForm?.first_visit_date_next_visit}
             onDateChange={value => setSurveyForm(current => ({...current, first_visit_date_next_visit: value}))}
           />
         </View>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomDatePicker 
             selectedDate={surveyForm?.second_visit_date_next_visit}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_date_next_visit: value}))}
@@ -174,14 +174,14 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <View style={styles.column}>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomInput 
             value={surveyForm?.first_visit_interviewer}
             setValue={value => setSurveyForm(current => ({...current, first_visit_interviewer: value}))}
             placeholder={'Type here'}
           />
         </View>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomInput 
             value={surveyForm?.second_visit_interviewer}
             setValue={value => setSurveyForm(current => ({...current, second_visit_interviewer: value}))}
@@ -201,14 +201,14 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <View style={styles.column}>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomInput 
             value={surveyForm?.first_visit_supervisor}
             setValue={value => setSurveyForm(current => ({...current, first_visit_supervisor: value}))}
             placeholder={'Type here'}
           />
         </View>
-        <View style={{ width: '48%' }}>
+        <View style={{ width: '49%' }}>
           <CustomInput 
             value={surveyForm?.second_visit_supervisor}
             setValue={value => setSurveyForm(current => ({...current, second_visit_supervisor: value}))}

@@ -2,17 +2,22 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 import CustomButton from '../components/CustomButton'
 import { Ionicons } from '@expo/vector-icons';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
+
+  const logout = () => {
+    console.log("logout");
+  }
+
   return (
     <View style={styles.root}>
       <View style={{ flex: 1, alignItems: 'flex-end' }}>
-        <Pressable>
+        <Pressable onPress={logout}>
           <Ionicons name='log-out-outline' size={28} color={'#008605'} />
         </Pressable>
       </View>
       <View>
         <Text style={styles.text}>Baseline Census for the Establishment of <Text style={{ color: '#008605', fontWeight: 600}}>Registry of Barangay Inhabitants and Migrants</Text></Text>
-        <CustomButton text={"SURVEY FORM"} bColor={'#008605'} bgColor={'transparent'} fgColor={'#008605'}/>
+        <CustomButton text={"SURVEY FORM"} bColor={'#008605'} bgColor={'transparent'} fgColor={'#008605'} onPress={() => navigation.navigate('SurveyForm')}/>
       </View>
     </View>
   )

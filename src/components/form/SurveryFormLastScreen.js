@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
-import { Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Image, ScrollView, StyleSheet, Text, View, Alert } from 'react-native'
 
 import HeightSpacer from '../spacer/HeightSpacer'
 import CustomButton from '../CustomButton'
@@ -8,7 +8,21 @@ import CustomButton from '../CustomButton'
 import succesImage from '../../../assets/images/success-image.png'
 
 const SurveryFormLastScreen = ({ setActiveScreen }) => {
-  const { surveyForm, setSurveyForm } = useContext(SurveyFormContext)
+  const { submitForm } = useContext(SurveyFormContext)
+
+  const alertMessage = () => {
+    Alert.alert(
+      'Submit', 
+      'Are you sure you want to want to submit the form?', 
+      [
+        {text: 'No'},
+        {
+          text: 'Yes',
+          onPress: () => submitForm()
+        },
+      ]
+    );
+  }
 
   return (
     <ScrollView>
@@ -19,7 +33,7 @@ const SurveryFormLastScreen = ({ setActiveScreen }) => {
       <HeightSpacer size={80}/>
       <Text style={{ fontSize: 14, textAlign: 'justify'}}>Please carefully review the survey form before submitting. Any mistakes, such as typos or empty fields, cannot be corrected afterward. If you have any concerns, kindly inform your supervisor.</Text>
       <HeightSpacer size={10}/>
-      <CustomButton text={"SUBMIT"} bgColor={'transparent'} fgColor={'#008605'} bColor={'#008605'} onPress={() => console.log('Submit')} />
+      <CustomButton text={"SUBMIT"} bgColor={'transparent'} fgColor={'#008605'} bColor={'#008605'} onPress={() => alertMessage()} />
       <HeightSpacer size={10}/>
       <CustomButton text={"GO BACK"} bgColor={'#808080'} onPress={() => setActiveScreen(current => current - 1)}/>
     </ScrollView>

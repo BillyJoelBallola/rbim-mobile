@@ -36,14 +36,14 @@ import QuestionsPart29 from '../components/form/QuestionsPart29'
 import QuestionsPart30 from '../components/form/QuestionsPart30'
 import SurveryFormLastScreen from '../components/form/SurveryFormLastScreen'
 
-const SurveyFormScreen = () => {
+const SurveyFormScreen = ({ navigation }) => {
   const [checked, setChecked] = useState(false)
   const [activeScreen, setActiveScreen] = useState(1)
 
   const ShowActiveScreen = () => {
     switch (activeScreen) {
       case 1:
-        return <Permission checked={checked} setChecked={setChecked} setActiveScreen={setActiveScreen}/>
+        return <Permission checked={checked} setChecked={setChecked} setActiveScreen={setActiveScreen} navigation={navigation}/>
       case 2:
         return <Identification setActiveScreen={setActiveScreen}/>
       case 3:

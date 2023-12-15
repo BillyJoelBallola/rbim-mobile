@@ -40,7 +40,7 @@ const Identification = ({ setActiveScreen }) => {
       <View>
         <CustomInput label={'Household Number'} placeholder={'e.g 0000043'} value={household?.household_number} setValue={(value) => setHousehold(current => ({...current, household_number: value}))}/>
         <HeightSpacer size={10}/>
-        <CustomRadioButton value={household?.household_type} setValue={(value) => setHousehold(current => ({...current, household_type: value}))} radioBtnData={radioBtnData} />
+        <CustomRadioButton value={household?.living_type} setValue={(value) => setHousehold(current => ({...current, living_type: value}))} radioBtnData={radioBtnData} />
         <HeightSpacer size={20}/>
 
         <CustomTitle text={"A. IDENTIDICATION"} size={16} />
@@ -63,8 +63,6 @@ const Identification = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
-      <HeightSpacer size={10}/>
-      <CustomButton text={"CANCEL"} bgColor={'#808080'}/>
     </ScrollView>
   )
 }

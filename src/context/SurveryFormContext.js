@@ -34,7 +34,7 @@ export const SurveyFormContextProvider = ({ children }) => {
   })
   const [household, setHousehold] = useState({
     household_number: '',
-    household_type: 'household',
+    living_type: 'household',
     respondent_name: '',
     household_head: '',
     household_member_no: '',
@@ -56,8 +56,6 @@ export const SurveyFormContextProvider = ({ children }) => {
     onChange(newArray);
   } 
 
-  // console.log(JSON.stringify(surveyForm, null, 2));
-
   const membersData = [
     { questionsAndAnswer: questionsAndAnswerMember1, setQuestionAndAnswer: setQuestionAndAnswerMember1 },
     { questionsAndAnswer: questionsAndAnswerMember2, setQuestionAndAnswer: setQuestionAndAnswerMember2 },
@@ -71,6 +69,12 @@ export const SurveyFormContextProvider = ({ children }) => {
     { questionsAndAnswer: questionsAndAnswerMember10, setQuestionAndAnswer: setQuestionAndAnswerMember10 },
   ];
 
+  const submitForm = () => {
+    console.log('Submit');
+  }
+
+  // console.log(JSON.stringify(surveyForm, null, 2));
+
   return (
     <SurveyFormContext.Provider 
       value={{ 
@@ -79,7 +83,8 @@ export const SurveyFormContextProvider = ({ children }) => {
         handleInputChange,
         membersData,
         surveyForm,
-        setSurveyForm
+        setSurveyForm,
+        submitForm
       }}
     >
       {children}

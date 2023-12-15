@@ -5,9 +5,13 @@ import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import HeightSpacer from '../components/spacer/HeightSpacer';
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  const login = () => {
+    navigation.navigate('Home')
+  }
 
   return (
     <View style={styles.root}>
@@ -38,7 +42,7 @@ const LoginScreen = () => {
 
       <HeightSpacer size={20} />
     
-      <CustomButton text={'LOGIN'} onPress={() => console.log("wow")} />
+      <CustomButton text={'LOGIN'} onPress={login} />
       <Text style={{ color: '#808080', marginTop: 15 }}>Can't login? Contact your supervisor</Text>
     </View> 
   )

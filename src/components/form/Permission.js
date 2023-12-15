@@ -1,9 +1,18 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, Alert } from 'react-native'
 import CustomCheckBox from '../CustomCheckBox'
 import CustomButton from '../CustomButton'
 import HeightSpacer from '../spacer/HeightSpacer'
 
-const Permission = ({ checked, setChecked, setActiveScreen }) => {
+const Permission = ({ checked, setChecked, setActiveScreen, navigation }) => {
+  const alertMessage = () => {
+    Alert.alert(
+      'Failed', 
+      'Unable to continue to survey form, please check the box to continue', 
+      [{text: 'OK'}],
+      {cancelable: true}
+    );
+  }
+
   return (
     <View style={styles.root}>
       <View>
@@ -14,12 +23,12 @@ const Permission = ({ checked, setChecked, setActiveScreen }) => {
       </View>
       <View>
         <CustomCheckBox setChecked={setChecked} checked={checked} label={"Pinahihintulutan ang panayam"}/>
-        <CustomButton text={'NEXT'} onPress={() => checked ? setActiveScreen(current => current + 1) : alert('Unable to continue to survey form') }/>
+        <CustomButton text={'CONTINUE'} onPress={() => checked ? setActiveScreen(current => current + 1) : alertMessage()}/>
         <HeightSpacer size={10} />
         <CustomButton 
-          href={'/HomeScreen'} 
           text={'CANCEL'} 
           bgColor={"#808080"}
+          onPress={() => navigation?.navigate('Home')}
         />
       </View>
     </View>
