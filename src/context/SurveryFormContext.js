@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import apiClient from '../api/client'
 
 export const SurveyFormContext = createContext({})
 
@@ -44,18 +45,6 @@ export const SurveyFormContextProvider = ({ children }) => {
     street: '',
   })
 
-  const handleInputChange = (index, value, array, onChange) => {
-    const newArray = [...array]
-
-    if (!newArray[index]) {
-      newArray[index] = {};
-    }
-
-    newArray[index] = value;
-
-    onChange(newArray);
-  } 
-
   const membersData = [
     { questionsAndAnswer: questionsAndAnswerMember1, setQuestionAndAnswer: setQuestionAndAnswerMember1 },
     { questionsAndAnswer: questionsAndAnswerMember2, setQuestionAndAnswer: setQuestionAndAnswerMember2 },
@@ -69,11 +58,54 @@ export const SurveyFormContextProvider = ({ children }) => {
     { questionsAndAnswer: questionsAndAnswerMember10, setQuestionAndAnswer: setQuestionAndAnswerMember10 },
   ];
 
-  const submitForm = () => {
-    console.log('Submit');
+  const alertMessage = (title, message, buttons) => {
+    Alert.alert(
+      title, 
+      message,
+      buttons
+    );
   }
 
-  // console.log(JSON.stringify(surveyForm, null, 2));
+  const handleInputChange = (index, value, array, onChange) => {
+    const newArray = [...array]
+
+    if (!newArray[index]) {
+      newArray[index] = {};
+    }
+
+    newArray[index] = value;
+
+    onChange(newArray);
+  } 
+
+  const submitForm = async (navigation) => {
+    const questionsAndResponses = [
+      questionsAndAnswerMember1,
+      questionsAndAnswerMember2,
+      questionsAndAnswerMember3,
+      questionsAndAnswerMember4,
+      questionsAndAnswerMember5,
+      questionsAndAnswerMember6,
+      questionsAndAnswerMember7,
+      questionsAndAnswerMember8,
+      questionsAndAnswerMember9,
+      questionsAndAnswerMember10
+    ]
+
+    try {
+      const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
+      if(data.success){
+        alertMessage('Success', 'Survey form submitted successfully')
+        setTimeout(() => {
+          navigation.navigate('Home')
+        }, [1500])
+      }else{
+        alertMessage('Failed', 'Failed to submit survey form')
+      }
+    } catch (error) {
+      return alertMessage('Failed', 'An unexpected error occurred. Please try again later', [{ text: 'Ok' }])
+    }
+  }
 
   return (
     <SurveyFormContext.Provider 

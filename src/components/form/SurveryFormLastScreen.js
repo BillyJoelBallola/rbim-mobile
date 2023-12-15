@@ -7,7 +7,7 @@ import CustomButton from '../CustomButton'
 
 import succesImage from '../../../assets/images/success-image.png'
 
-const SurveryFormLastScreen = ({ setActiveScreen }) => {
+const SurveryFormLastScreen = ({ setActiveScreen, navigation }) => {
   const { submitForm } = useContext(SurveyFormContext)
 
   const alertMessage = () => {
@@ -18,7 +18,7 @@ const SurveryFormLastScreen = ({ setActiveScreen }) => {
         {text: 'No'},
         {
           text: 'Yes',
-          onPress: () => submitForm()
+          onPress: () => submitForm(navigation)
         },
       ]
     );

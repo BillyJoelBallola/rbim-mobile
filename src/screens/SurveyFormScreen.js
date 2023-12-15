@@ -109,7 +109,7 @@ const SurveyFormScreen = ({ navigation }) => {
       case 33:
         return <QuestionsPart30 setActiveScreen={setActiveScreen}/>
       case 34:
-        return <SurveryFormLastScreen setActiveScreen={setActiveScreen}/>
+        return <SurveryFormLastScreen setActiveScreen={setActiveScreen} navigation={navigation}/>
       default:
         setActiveScreen(1)
         return <Permission checked={checked} setChecked={setChecked} setActiveScreen={setActiveScreen}/>
