@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, Alert} from 'react-native';
+import { StyleSheet, Text, View, Image, Alert } from 'react-native';
 import { UserContext } from '../context/UserContext';
 import apiClient from '../api/client'
 
 import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import HeightSpacer from '../components/spacer/HeightSpacer';
+import LoadingButton from '../components/LoadingButton';
 
 import Logo from '../../assets/images/RBIM-logo-black.png';
 
@@ -13,12 +14,13 @@ const LoginScreen = ({ navigation }) => {
   const { setToken, setUpdate, user } = useContext(UserContext)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    if(user !== null){
-      navigation.navigate('Home')
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(user !== null){
+  //     navigation.navigate('Home')
+  //   }
+  // }, [user])
 
   const showAlert = (title, content) => {
     Alert.alert(
@@ -31,7 +33,9 @@ const LoginScreen = ({ navigation }) => {
 
   const login = async () => {
     try {
+      setLoading(true)
       if(username === '' && password === '') {
+        setLoading(false)
         return showAlert('Failed', 'Fill up all fields')
       }
 
@@ -41,8 +45,10 @@ const LoginScreen = ({ navigation }) => {
         setUpdate('login')
         setUsername('')
         setPassword('')
+        setLoading(false)
         navigation.navigate('Home')
       }else{
+        setLoading(false)
         return showAlert('Failed', data.message)
       }
     } catch (error) {
@@ -79,7 +85,10 @@ const LoginScreen = ({ navigation }) => {
 
       <HeightSpacer size={20} />
     
-      <CustomButton text={'LOGIN'} onPress={login} />
+      {
+        loading ? <LoadingButton bgColor={'#008605'} color={'#fff'} /> : <CustomButton text={'LOGIN'} onPress={login} disable={loading ? true : false}/>
+      }
+
       <Text style={{ color: '#808080', marginTop: 15 }}>Can't login? Contact your supervisor</Text>
     </View> 
   )

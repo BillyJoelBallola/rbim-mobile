@@ -3,6 +3,19 @@ import apiClient from '../api/client'
 
 export const SurveyFormContext = createContext({})
 
+const addMemberNoToResponses  = (array, memberNo) => {
+  const result = []
+
+  if(array.length > 0){
+    array.forEach(item => {
+      const { question, response } = item
+      result.push({ memberNo, question, response })
+    })
+  }
+
+  return result
+}
+
 export const SurveyFormContextProvider = ({ children }) => {
   const [questionsAndAnswerMember1, setQuestionAndAnswerMember1] = useState([])
   const [questionsAndAnswerMember2, setQuestionAndAnswerMember2] = useState([])
@@ -80,16 +93,16 @@ export const SurveyFormContextProvider = ({ children }) => {
 
   const submitForm = async (navigation) => {
     const questionsAndResponses = [
-      questionsAndAnswerMember1,
-      questionsAndAnswerMember2,
-      questionsAndAnswerMember3,
-      questionsAndAnswerMember4,
-      questionsAndAnswerMember5,
-      questionsAndAnswerMember6,
-      questionsAndAnswerMember7,
-      questionsAndAnswerMember8,
-      questionsAndAnswerMember9,
-      questionsAndAnswerMember10
+      addMemberNoToResponses(questionsAndAnswerMember1, 1),
+      addMemberNoToResponses(questionsAndAnswerMember2, 2),
+      addMemberNoToResponses(questionsAndAnswerMember3, 3),
+      addMemberNoToResponses(questionsAndAnswerMember4, 4),
+      addMemberNoToResponses(questionsAndAnswerMember5, 5),
+      addMemberNoToResponses(questionsAndAnswerMember6, 6),
+      addMemberNoToResponses(questionsAndAnswerMember7, 7),
+      addMemberNoToResponses(questionsAndAnswerMember8, 8),
+      addMemberNoToResponses(questionsAndAnswerMember9, 9),
+      addMemberNoToResponses(questionsAndAnswerMember10, 10)
     ]
 
     try {

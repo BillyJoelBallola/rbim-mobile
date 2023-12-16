@@ -7,6 +7,7 @@ import CustomTitle from '../CustomTitle'
 import HeightSpacer from '../spacer/HeightSpacer'
 import Divider from '../Divider'
 import CustomInput from '../CustomInput'
+import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
 
@@ -62,10 +63,10 @@ const QuestionsPart21 = ({ setActiveScreen }) => {
                     />
                   </View>
                   <View style={{ width: '40%' }}>
-                    <CustomInput 
-                      value={member.questionsAndAnswer[35]?.response}
-                      setValue={value => handleInputChange(35, { question: 'Q36', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-                      placeholder={'Type here'}
+                    <CustomDropdown 
+                      selected={member.questionsAndAnswer[35]?.response}
+                      onSelect={value => handleInputChange(35, { question: 'Q36', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      data={question36Data.responses}
                     />
                   </View>
                 </View>
