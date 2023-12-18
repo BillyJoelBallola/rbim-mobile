@@ -1,4 +1,6 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { Alert } from "react-native";
+import { UserContext } from "./UserContext";
 import apiClient from '../api/client'
 
 export const SurveyFormContext = createContext({})
@@ -17,6 +19,7 @@ const addMemberNoToResponses  = (array, memberNo) => {
 }
 
 export const SurveyFormContextProvider = ({ children }) => {
+  const { user } = useContext(UserContext)
   const [questionsAndAnswerMember1, setQuestionAndAnswerMember1] = useState([])
   const [questionsAndAnswerMember2, setQuestionAndAnswerMember2] = useState([])
   const [questionsAndAnswerMember3, setQuestionAndAnswerMember3] = useState([])
@@ -58,6 +61,15 @@ export const SurveyFormContextProvider = ({ children }) => {
     street: '',
   })
 
+  useEffect(() => {
+    setSurveyForm(current => ({
+      ...current,
+      date_encoded: new Date(),
+      encoder_name: user?.name,
+      supervisor_name: 'Secretary',
+    }))
+  }, [user])
+
   const membersData = [
     { questionsAndAnswer: questionsAndAnswerMember1, setQuestionAndAnswer: setQuestionAndAnswerMember1 },
     { questionsAndAnswer: questionsAndAnswerMember2, setQuestionAndAnswer: setQuestionAndAnswerMember2 },
@@ -71,11 +83,16 @@ export const SurveyFormContextProvider = ({ children }) => {
     { questionsAndAnswer: questionsAndAnswerMember10, setQuestionAndAnswer: setQuestionAndAnswerMember10 },
   ];
 
-  const alertMessage = (title, message, buttons) => {
+  const alertMessage = (title, message, navigation) => {
     Alert.alert(
       title, 
       message,
-      buttons
+      [
+        {
+          text: "Ok",
+          onPress: () =>  navigation.navigate('Home')
+        }
+      ]
     );
   }
 
@@ -83,7 +100,7 @@ export const SurveyFormContextProvider = ({ children }) => {
     const newArray = [...array]
 
     if (!newArray[index]) {
-      newArray[index] = {};
+      newArray[index] = {}; 
     }
 
     newArray[index] = value;
@@ -91,7 +108,8 @@ export const SurveyFormContextProvider = ({ children }) => {
     onChange(newArray);
   } 
 
-  const submitForm = async (navigation) => {
+  const submitForm = async (navigation, setLoading) => {
+    setLoading(true)
     const questionsAndResponses = [
       addMemberNoToResponses(questionsAndAnswerMember1, 1),
       addMemberNoToResponses(questionsAndAnswerMember2, 2),
@@ -108,15 +126,54 @@ export const SurveyFormContextProvider = ({ children }) => {
     try {
       const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
       if(data.success){
-        alertMessage('Success', 'Survey form submitted successfully')
-        setTimeout(() => {
-          navigation.navigate('Home')
-        }, [1500])
+        setQuestionAndAnswerMember1([])
+        setQuestionAndAnswerMember2([])
+        setQuestionAndAnswerMember3([])
+        setQuestionAndAnswerMember4([])
+        setQuestionAndAnswerMember5([])
+        setQuestionAndAnswerMember6([])
+        setQuestionAndAnswerMember7([])
+        setQuestionAndAnswerMember8([])
+        setQuestionAndAnswerMember9([])
+        setQuestionAndAnswerMember10([])
+        setSurveyForm({
+          first_visit_date: '',
+          first_visit_time_start: '',
+          first_visit_time_end: '',
+          first_visit_result: '',
+          first_visit_date_next_visit: '',
+          first_visit_interviewer: '',
+          first_visit_supervisor: '',
+          second_visit_date: '',
+          second_visit_time_start: '',
+          second_visit_time_end: '',
+          second_visit_result: '',
+          second_visit_date_next_visit: '',
+          second_visit_interviewer: '',
+          second_visit_supervisor: '',
+          date_encoded: '',
+          encoder_name: '',
+          supervisor_name: '',
+        })
+        setHousehold({
+          household_number: '',
+          living_type: 'household',
+          respondent_name: '',
+          household_head: '',
+          household_member_no: '',
+          address: '',
+          unit_no: '',
+          house_no: '',
+          street: ''
+        })
+        alertMessage('Success', 'Survey form submitted successfully', navigation)
       }else{
-        alertMessage('Failed', 'Failed to submit survey form')
+        alertMessage('Failed', 'Failed to submit survey form', navigation)
       }
     } catch (error) {
-      return alertMessage('Failed', 'An unexpected error occurred. Please try again later', [{ text: 'Ok' }])
+      return alertMessage('Failed', 'An unexpected error occurred. Please try again later', navigation)
+    } finally {
+      setLoading(false)
     }
   }
 

@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 
 import CustomTitle from '../CustomTitle'
 import HeightSpacer from '../spacer/HeightSpacer'
@@ -10,7 +10,7 @@ import { SurveyFormContext } from '../../context/SurveryFormContext'
 import { QuestionsContext } from '../../context/QuestionsContext'
 import TextQuestion from '../TextQuestion'
 
-const QuestionsPart25 = ({ setActiveScreen }) => {
+const QuestionsPart25 = ({ setActiveScreen, showSideBar }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -23,9 +23,9 @@ const QuestionsPart25 = ({ setActiveScreen }) => {
       <CustomTitle text={'FOR MIGRANTS AND TRANSIENTS'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>
       <View style={styles.column}>
-        <View style={{ width: '15%' }}>
+        <Pressable onPress={showSideBar} style={{ width: '15%' }}>
           <Text>No. of HH members</Text>
-        </View>
+        </Pressable>
         <View style={{ width: '40%' }}>
           <TextQuestion
             questionNo={question40BData.questionCode}

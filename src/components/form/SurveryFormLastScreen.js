@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 import { Image, ScrollView, StyleSheet, Text, View, Alert } from 'react-native'
 
@@ -6,8 +6,10 @@ import HeightSpacer from '../spacer/HeightSpacer'
 import CustomButton from '../CustomButton'
 
 import succesImage from '../../../assets/images/success-image.png'
+import LoadingButton from '../LoadingButton'
 
 const SurveryFormLastScreen = ({ setActiveScreen, navigation }) => {
+  const [loading, setLoading] = useState(false)
   const { submitForm } = useContext(SurveyFormContext)
 
   const alertMessage = () => {
@@ -18,7 +20,7 @@ const SurveryFormLastScreen = ({ setActiveScreen, navigation }) => {
         {text: 'No'},
         {
           text: 'Yes',
-          onPress: () => submitForm(navigation)
+          onPress: () => submitForm(navigation, setLoading)
         },
       ]
     );
@@ -33,7 +35,12 @@ const SurveryFormLastScreen = ({ setActiveScreen, navigation }) => {
       <HeightSpacer size={80}/>
       <Text style={{ fontSize: 14, textAlign: 'justify'}}>Please carefully review the survey form before submitting. Any mistakes, such as typos or empty fields, cannot be corrected afterward. If you have any concerns, kindly inform your supervisor.</Text>
       <HeightSpacer size={10}/>
-      <CustomButton text={"SUBMIT"} bgColor={'transparent'} fgColor={'#008605'} bColor={'#008605'} onPress={() => alertMessage()} />
+      {
+        loading ?
+        <LoadingButton bgColor={'transparent'} color={'#008605'} borderColor={'#008605'} />
+        :
+        <CustomButton disable={loading ? true : false} text={"SUBMIT"} bgColor={'transparent'} fgColor={'#008605'} bColor={'#008605'} onPress={() => alertMessage()} />
+      }
       <HeightSpacer size={10}/>
       <CustomButton text={"GO BACK"} bgColor={'#808080'} onPress={() => setActiveScreen(current => current - 1)}/>
     </ScrollView>

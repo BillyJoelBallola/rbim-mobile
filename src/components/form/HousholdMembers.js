@@ -12,7 +12,7 @@ const HousholdMembers = ({ setActiveScreen }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
 
   return (
-    <ScrollView style={styles.root}>
+    <ScrollView>
       <CustomTitle text={'A. DEMOGRAPHIC CHARACTERISTICS'} size={16}/>
       <CustomTitle text={'FOR ALL HOUSEHOLD MEMEBERS'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>
@@ -29,13 +29,12 @@ const HousholdMembers = ({ setActiveScreen }) => {
       }
       
       <HeightSpacer size={20}/>
-      <CustomButton text={'NEXT'} onPress={() => setActiveScreen(current => current + 1)}/>
+      <CustomButton text={'NEXT'} 
+        onPress={() => setActiveScreen(current => current + 1)}/>
       <HeightSpacer size={10}/>
       <CustomButton text={'PREVIOUS'} bgColor={'#808080'} onPress={() => setActiveScreen(current => current - 1)}/>
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({})
 
 export default HousholdMembers

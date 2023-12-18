@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import { QuestionsContext } from '../../context/QuestionsContext'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 
@@ -11,7 +11,7 @@ import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
 
-const QuestionsPart3 = ({ setActiveScreen }) => {
+const QuestionsPart3 = ({ setActiveScreen, showSideBar }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -23,9 +23,9 @@ const QuestionsPart3 = ({ setActiveScreen }) => {
       <CustomTitle text={'FOR ALL HOUSEHOLD MEMEBERS'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>
       <View style={styles.column}>
-        <View style={{ width: '15%' }}>
+        <Pressable onPress={showSideBar} style={{ width: '15%' }}>
           <Text>No. of HH members</Text>
-        </View>
+        </Pressable>
         <View style={{ width: '40%' }}>
           <TextQuestion questionNo={'Q6'} questionText={'Where was __ born?'} />
         </View>

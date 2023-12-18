@@ -86,7 +86,7 @@ const LoginScreen = ({ navigation }) => {
       <HeightSpacer size={20} />
     
       {
-        loading ? <LoadingButton bgColor={'#008605'} color={'#fff'} /> : <CustomButton text={'LOGIN'} onPress={login} disable={loading ? true : false}/>
+        loading ? <LoadingButton bgColor={'#008605'} color={'#fff'} borderColor={'transparent'} /> : <CustomButton text={'LOGIN'} onPress={login} disable={loading ? true : false}/>
       }
 
       <Text style={{ color: '#808080', marginTop: 15 }}>Can't login? Contact your supervisor</Text>
