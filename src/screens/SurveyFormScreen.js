@@ -132,7 +132,8 @@ const SurveyFormScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   root: {
     paddingHorizontal: 20,
-    paddingVertical: 50
+    paddingVertical: 50,
+    backgroundColor: '#fff'
   }
 })
 

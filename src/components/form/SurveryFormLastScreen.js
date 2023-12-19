@@ -27,7 +27,7 @@ const SurveryFormLastScreen = ({ setActiveScreen, navigation }) => {
   }
 
   return (
-    <ScrollView>
+    <View style={styles.root}>
       <HeightSpacer size={170}/>
       <View style={styles.contentContainer}>
         <Image source={succesImage} style={{ width: 250, height: 270 }}/>
@@ -43,11 +43,15 @@ const SurveryFormLastScreen = ({ setActiveScreen, navigation }) => {
       }
       <HeightSpacer size={10}/>
       <CustomButton text={"GO BACK"} bgColor={'#808080'} onPress={() => setActiveScreen(current => current - 1)}/>
-    </ScrollView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  root: {
+    height: '100%',
+    width: '100%'
+  },
   column: {   
     flex: 3,
     gap: 5,

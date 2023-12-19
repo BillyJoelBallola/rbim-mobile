@@ -6,10 +6,10 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import CustomTitle from '../CustomTitle'
 import HeightSpacer from '../spacer/HeightSpacer'
 import Divider from '../Divider'
-import CustomInput from '../CustomInput'
 import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomDatePicker from '../CustomDatePicker'
 
 const QuestionsPart22 = ({ setActiveScreen, showSideBar }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
@@ -56,10 +56,9 @@ const QuestionsPart22 = ({ setActiveScreen, showSideBar }) => {
                     <Text>#{idx + 1}</Text>
                   </View>
                   <View style={{ width: '40%' }}>
-                    <CustomInput 
-                      value={member.questionsAndAnswer[36]?.response}
-                      setValue={value => handleInputChange(36, { question: 'Q37', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
-                      placeholder={'Type here'}
+                    <CustomDatePicker 
+                      selectedDate={member.questionsAndAnswer[36]?.response}
+                      onDateChange={value => handleInputChange(36, { question: 'Q37', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
                     />
                   </View>
                   <View style={{ width: '40%' }}>

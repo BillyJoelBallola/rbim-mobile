@@ -14,6 +14,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 70,
     height: '100%',
+    backgroundColor: '#fff'
   }
 })
 

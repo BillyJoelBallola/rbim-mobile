@@ -109,7 +109,6 @@ export const SurveyFormContextProvider = ({ children }) => {
   } 
 
   const submitForm = async (navigation, setLoading) => {
-    setLoading(true)
     const questionsAndResponses = [
       addMemberNoToResponses(questionsAndAnswerMember1, 1),
       addMemberNoToResponses(questionsAndAnswerMember2, 2),

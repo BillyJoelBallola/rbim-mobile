@@ -15,14 +15,15 @@ const CustomGeneralDropdown = ({ data, selected, onSelect, label }) => {
   const [customInput, setCustomInput] = useState('');
 
   useEffect(() => {
-    setSelectedOption(selected || null);
+    const selectedItem = data.find(item => item.id === selected);
+    setSelectedOption(selectedItem || null);
   }, [selected]);
 
-
-  const handleSelect = (option) => {
-    setSelectedOption(option);
+  const handleSelect = (id) => {
+    const selectedItem = data.find(item => item.id === id);
+    setSelectedOption(selectedItem);
     setModalVisible(false);
-    onSelect(option);
+    onSelect(id);
   };
 
   const handleCustomInput = () => {
@@ -42,7 +43,7 @@ const CustomGeneralDropdown = ({ data, selected, onSelect, label }) => {
           onPress={() => setModalVisible(true)}
         >
           <Text style={styles.dropdownText}>
-            {selectedOption || 'Select an option'}
+            {selectedOption ? `${selectedOption.barangay}, ${selectedOption.municipal}, ${selectedOption.province},` : 'Select an option'}
           </Text>
         </TouchableOpacity>
 
@@ -61,7 +62,7 @@ const CustomGeneralDropdown = ({ data, selected, onSelect, label }) => {
                 renderItem={({ item }) => (
                   <TouchableOpacity
                     style={styles.optionItem}
-                    onPress={() => handleSelect(`${item.barangay}, ${item.municipal}, ${item.province}`)}
+                    onPress={() => handleSelect(item.id)}
                   >
                     <Text>{item.barangay}, {item.municipal}, {item.province}</Text>
                   </TouchableOpacity>
