@@ -32,8 +32,8 @@ const QuestionsPart2 = ({ setActiveScreen, showSideBar }) => {
 
       {
         membersData && 
-        membersData.map((member, index) => (
-        <View key={index}>
+        membersData.map((member, idx) => (
+        <View key={idx}>
           {
             member.questionsAndAnswer.length > 0 &&
             <>
@@ -42,7 +42,7 @@ const QuestionsPart2 = ({ setActiveScreen, showSideBar }) => {
               <HeightSpacer size={10}/>
               <View style={styles.column}>
                 <View style={{ width: '15%', alignItems: 'center', justifyContent: 'center' }}>
-                  <Text>{`#${index + 1}`}</Text>
+                  <Text>{`#${idx + 1}`}</Text>
                 </View>
                 <View style={{ width: '40%' }}>
                   <CustomInput
