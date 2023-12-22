@@ -43,7 +43,7 @@ const QuestionsPart8 = ({ setActiveScreen, showSideBar }) => {
                   <View style={{ width: '80%' }}>
                     <CustomInput 
                       value={member.questionsAndAnswer[13]?.response} 
-                      setValue={(value) => handleInputChange(13, { question: 'Q14', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)} 
+                      setValue={(value) => handleInputChange(13, { memberNo: idx + 1, question: 'Q14', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)} 
                       placeholder={"Type here"}
                     />
                   </View>

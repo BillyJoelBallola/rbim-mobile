@@ -48,13 +48,13 @@ const QuestionsPart2 = ({ setActiveScreen, showSideBar }) => {
                   <CustomInput
                     placeholder={"Type here"}
                     value={member.questionsAndAnswer[3]?.response}
-                    setValue={(value) => handleInputChange(3, { question: `Q4`, response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                    setValue={(value) => handleInputChange(3, { memberNo: idx + 1, question: `Q4`, response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
                   />
                 </View>
                 <View style={{ width: '40%' }}>
                   <CustomDatePicker
                     selectedDate={member.questionsAndAnswer[4]?.response}
-                    onDateChange={(value) => handleInputChange(4, { question: `Q5`, response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                    onDateChange={(value) => handleInputChange(4, { memberNo: idx + 1, question: `Q5`, response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
                   />
                 </View>
               </View>

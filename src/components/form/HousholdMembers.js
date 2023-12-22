@@ -10,7 +10,7 @@ import TextQuestion from '../TextQuestion'
 
 const HousholdMembers = ({ setActiveScreen }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
-
+  
   return (
     <ScrollView>
       <CustomTitle text={'A. DEMOGRAPHIC CHARACTERISTICS'} size={16}/>
@@ -23,7 +23,19 @@ const HousholdMembers = ({ setActiveScreen }) => {
         membersData.map((member, idx) => (
           <View key={idx}>
             <HeightSpacer size={10}/>
-            <CustomInput label={`#${idx + 1} Member`} placeholder={'Surname, First name, Middle name'} value={member.questionsAndAnswer[0]?.response} setValue={(value) => handleInputChange(0, { question: 'Q1', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}/>
+            <CustomInput 
+              label={`#${idx + 1} Member`} 
+              placeholder={'Surname, First name, Middle name'} 
+              value={member.questionsAndAnswer[0]?.response} 
+              setValue={(value) => 
+                handleInputChange(
+                  0, 
+                  { memberNo: idx + 1, question: 'Q1', response: value }, 
+                  member.questionsAndAnswer, 
+                  member.setQuestionAndAnswer
+                )
+              }
+            />
           </View>
         ))
       }

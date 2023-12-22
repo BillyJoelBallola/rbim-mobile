@@ -15,13 +15,15 @@ const CustomDropdown = ({ data, selected, onSelect, label }) => {
   const [customInput, setCustomInput] = useState('');
 
   useEffect(() => {
-    setSelectedOption(selected || null);
+    const selectedResponse = data.find(item => item.responseCode === selected) 
+    setSelectedOption(selectedResponse || null);
   }, [selected]);
 
-  const handleSelect = (option) => {
-    setSelectedOption(option);
+  const handleSelect = (code) => {
+    const selectedResponse = data.find(item => item.responseCode === code) 
+    setSelectedOption(selectedResponse);
     setModalVisible(false);
-    onSelect(option);
+    onSelect(code);
   };
 
   const handleCustomInput = () => {
@@ -41,7 +43,7 @@ const CustomDropdown = ({ data, selected, onSelect, label }) => {
           onPress={() => setModalVisible(true)}
         >
           <Text style={styles.dropdownText}>
-            {selectedOption || 'Select an option'}
+            {selectedOption ? `${selectedOption.responseCode} - ${selectedOption.responseText}` : 'Select an option'}
           </Text>
         </TouchableOpacity>
 
