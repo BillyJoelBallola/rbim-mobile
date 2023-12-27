@@ -110,24 +110,24 @@ const styles = StyleSheet.create({
   },
   centeredModal: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.31)'
   },
   modalContainer: {
-    width: '80%',
+    width: '100%',
     maxHeight: '50%',
     padding: 20,
     backgroundColor: 'white',
-    borderRadius: 10,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#808080',
+    borderTopEndRadius: 30,
+    borderTopStartRadius: 30,
+    alignItems: 'center'
   },
   optionItem: {
     padding: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#d9d9d9',
-    width: '100%',
+    width: '100%'
   },
   input: {
     height: 40,
