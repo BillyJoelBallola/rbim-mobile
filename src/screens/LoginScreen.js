@@ -16,11 +16,11 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
-  // useEffect(() => {
-  //   if(user !== null){
-  //     navigation.navigate('Home')
-  //   }
-  // }, [user])
+  useEffect(() => {
+    if(user !== null){
+      navigation.navigate('Home')
+    }
+  }, [user])
 
   const showAlert = (title, content) => {
     Alert.alert(

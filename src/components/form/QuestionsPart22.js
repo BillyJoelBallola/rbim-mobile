@@ -57,15 +57,27 @@ const QuestionsPart22 = ({ setActiveScreen, showSideBar }) => {
                   </View>
                   <View style={{ width: '40%' }}>
                     <CustomDatePicker 
-                      selectedDate={member.questionsAndAnswer[36]?.response}
-                      onDateChange={value => handleInputChange(36, { memberNo: idx + 1, question: 'Q37', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
+                      selectedDate={member.questionsAndAnswer[36] || ''}
+                      onDateChange={value => 
+                        handleInputChange(36, 
+                          value, 
+                          member.questionsAndAnswer, 
+                          member.setQuestionAndAnswer
+                        )
+                      }
                     />
                   </View>
                   <View style={{ width: '40%' }}>
                     <CustomDropdown 
-                      selected={member.questionsAndAnswer[37]?.response}
-                      onSelect={value => handleInputChange(37, { memberNo: idx + 1, question: 'Q38A', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
                       data={question38AData.responses}
+                      selected={member.questionsAndAnswer[37] || ''}
+                      onSelect={value => 
+                        handleInputChange(37, 
+                          value, 
+                          member.questionsAndAnswer, 
+                          member.setQuestionAndAnswer
+                        )
+                      }
                     />
                   </View>
                 </View>

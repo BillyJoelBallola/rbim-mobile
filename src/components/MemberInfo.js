@@ -59,13 +59,13 @@ const MemberInfo = ({ show, setShow }) => {
                       <Text>#{idx + 1}</Text>
                     </View>
                     <View style={{ width: '50%'}}>
-                      <Text>{member.questionsAndAnswer[0].response}</Text>
+                      <Text>{member.questionsAndAnswer[0] ? member.questionsAndAnswer[0] : '--'}</Text>
                     </View>
                     <View style={{ width: '10%' }}>
-                      <Text>{member.questionsAndAnswer[2]?.response}</Text>
+                      <Text>{member.questionsAndAnswer[2] ? member.questionsAndAnswer[2] : '--'}</Text>
                     </View>
                     <View style={{ width: '10%' }}>
-                      <Text>{member.questionsAndAnswer[3]?.response}</Text>
+                      <Text>{member.questionsAndAnswer[3] ? member.questionsAndAnswer[3] : '--'}</Text>
                     </View>
                   </View>
                 </>

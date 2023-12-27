@@ -56,16 +56,28 @@ const QuestionsPart23 = ({ setActiveScreen, showSideBar }) => {
                   </View>
                   <View style={{ width: '40%' }}>
                     <CustomDropdown 
-                      selected={member.questionsAndAnswer[38]?.response}
-                      onSelect={value => handleInputChange(38, { memberNo: idx + 1, question: 'Q38B', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
                       data={question38BData.responses}
+                      selected={member.questionsAndAnswer[38] || ''}
+                      onSelect={value => 
+                        handleInputChange(38, 
+                          value, 
+                          member.questionsAndAnswer, 
+                          member.setQuestionAndAnswer
+                        )
+                      }
                     />
                   </View>
                   <View style={{ width: '40%' }}>
                     <CustomDropdown 
-                      selected={member.questionsAndAnswer[39]?.response}
-                      onSelect={value => handleInputChange(39, { memberNo: idx + 1, question: 'Q38C', response: value }, member.questionsAndAnswer, member.setQuestionAndAnswer)}
                       data={question38CData.responses}
+                      selected={member.questionsAndAnswer[39] || ''}
+                      onSelect={value => 
+                        handleInputChange(39, 
+                          value, 
+                          member.questionsAndAnswer, 
+                          member.setQuestionAndAnswer
+                        )
+                      }
                     />
                   </View>
                 </View>

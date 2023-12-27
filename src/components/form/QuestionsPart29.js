@@ -12,8 +12,8 @@ import CustomInput from '../CustomInput'
 
 const QuestionsPart29 = ({ setActiveScreen }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
-  const { questions } = useContext(QuestionsContext)
-
+  const { questions }  = useContext(QuestionsContext)
+    
   const question45Data = questions['Q45']
   const question46Data = questions['Q46']
   const question47Data = questions['Q47']
@@ -38,9 +38,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-             selected={membersData[0]?.questionsAndAnswer[49]?.response}
-             onSelect={value => handleInputChange(49, { memberNo: 1, question: 'Q45', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
              data={question45Data?.responses}
+             selected={membersData[0]?.questionsAndAnswer[49] || ''}
+             onSelect={value => 
+              handleInputChange(49, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -54,9 +60,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[50]?.response}
-            onSelect={value => handleInputChange(50, { memberNo: 1, question: 'Q46', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question46Data?.responses}
+            selected={membersData[0]?.questionsAndAnswer[50] || ''}
+            onSelect={value => 
+              handleInputChange(50, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -70,9 +82,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[51]?.response}
-            onSelect={value => handleInputChange(51, { memberNo: 1, question: 'Q47', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question47Data?.responses}
+            selected={membersData[0]?.questionsAndAnswer[51] || ''}
+            onSelect={value => 
+              handleInputChange(51, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -86,9 +104,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[52]?.response}
-            onSelect={value => handleInputChange(52, { memberNo: 1, question: 'Q48', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question48Data?.responses}
+            selected={membersData[0]?.questionsAndAnswer[52] || ''}
+            onSelect={value => 
+              handleInputChange(52, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -102,9 +126,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[53]?.response}
-            onSelect={value => handleInputChange(53, { memberNo: 1, question: 'Q49', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question49Data?.responses}
+            selected={membersData[0]?.questionsAndAnswer[53] || ''}
+            onSelect={value => 
+              handleInputChange(53, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -118,9 +148,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[54]?.response}
-            onSelect={value => handleInputChange(54, { memberNo: 1, question: 'Q50A', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question50AData?.responses}
+            selected={membersData[0]?.questionsAndAnswer[54] || ''}
+            onSelect={value => 
+              handleInputChange(54, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -134,9 +170,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[55]?.response}
-            onSelect={value => handleInputChange(55, { memberNo: 1, question: 'Q50B', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question50BData?.responses}
+            selected={membersData[0]?.questionsAndAnswer[55] || ''}
+            onSelect={value => 
+              handleInputChange(55, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -150,9 +192,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[56]?.response}
-            onSelect={value => handleInputChange(56, { memberNo: 1, question: 'Q51', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question51Data?.responses}
+            selected={membersData[0]?.questionsAndAnswer[56] || ''}
+            onSelect={value => 
+              handleInputChange(56, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -166,9 +214,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[57]?.response}
-            onSelect={value => handleInputChange(57, { memberNo: 1, question: 'Q52', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question52Data?.responses}
+            selected={membersData[0]?.questionsAndAnswer[57] || ''}
+            onSelect={value => 
+              handleInputChange(57, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -182,9 +236,15 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-            selected={membersData[0]?.questionsAndAnswer[58]?.response}
-            onSelect={value => handleInputChange(58, { memberNo: 1, question: 'Q53', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
             data={question53Data?.responses}
+            selected={membersData[0]?.questionsAndAnswer[58] || ''}
+            onSelect={value => 
+              handleInputChange(58, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
           />
         </View>
       </View>
@@ -198,8 +258,14 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomInput
-            value={membersData[0]?.questionsAndAnswer[59]?.response}
-            setValue={value => handleInputChange(59, { memberNo: 1, question: 'Q54', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
+            value={membersData[0]?.questionsAndAnswer[59] || ''}
+            setValue={value => 
+              handleInputChange(59, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
             placeholder={'Type here'}
           />
         </View>
@@ -214,8 +280,14 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomInput
-            value={membersData[0]?.questionsAndAnswer[60]?.response}
-            setValue={value => handleInputChange(60, { memberNo: 1, question: 'Q55', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
+            value={membersData[0]?.questionsAndAnswer[60] || ''}
+            setValue={value => 
+              handleInputChange(60, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
             placeholder={'Type here'}
           />
         </View>
@@ -230,8 +302,14 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomInput
-            value={membersData[0]?.questionsAndAnswer[61]?.response}
-            setValue={value => handleInputChange(61, { memberNo: 1, question: 'Q56', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
+            value={membersData[0]?.questionsAndAnswer[61] || ''}
+            setValue={value => 
+              handleInputChange(61, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
             placeholder={'Type here'}
           />
         </View>
@@ -246,8 +324,14 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomInput
-            value={membersData[0]?.questionsAndAnswer[62]?.response}
-            setValue={value => handleInputChange(62, { memberNo: 1, question: 'Q57', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
+            value={membersData[0]?.questionsAndAnswer[62] || ''}
+            setValue={value => 
+              handleInputChange(62, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
             placeholder={'Type here'}
           />
         </View>
@@ -262,8 +346,14 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomInput
-            value={membersData[0]?.questionsAndAnswer[63]?.response}
-            setValue={value => handleInputChange(63, { memberNo: 1, question: 'Q58', response: value }, membersData[0]?.questionsAndAnswer, membersData[0]?.setQuestionAndAnswer)}
+            value={membersData[0]?.questionsAndAnswer[63] || ''}
+            setValue={value => 
+              handleInputChange(63, 
+                value, 
+                membersData[0]?.questionsAndAnswer, 
+                membersData[0]?.setQuestionAndAnswer
+              )
+            }
             placeholder={'Type here'}
           />
         </View>

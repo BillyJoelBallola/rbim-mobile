@@ -8,7 +8,12 @@ export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [update, setUpdate] = useState(null)
 
+  const deleteToken = async (key) => {
+    await SecureStore.deleteItemAsync(key);
+  }
+
   const setToken = async (key, value) => {
+    await deleteToken('rbim_token')
     await SecureStore.setItemAsync(key, value)
   }
 
@@ -20,7 +25,7 @@ export const UserContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const token = await getToken('rbim_token') 
+        const token = await getToken('rbim_token')
         const { data } = await apiClient.post('/mobile/user_logged', { token })
         if(data.success){
           setUser(data.data)
@@ -33,6 +38,7 @@ export const UserContextProvider = ({ children }) => {
         setUpdate(null)
       }
     }
+
     if(user === null || update !== null){
       fetchUser()
     }
@@ -45,6 +51,7 @@ export const UserContextProvider = ({ children }) => {
         setUpdate,
         setToken, 
         getToken, 
+        deleteToken,
         user,
       }}
     >

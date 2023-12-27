@@ -3,6 +3,16 @@ import { Alert } from "react-native";
 import { UserContext } from "./UserContext";
 import apiClient from '../api/client'
 
+const addMemberNumber = (array, memberNo) => {
+  const newArray = [...array]
+
+  if(array.length > 0){
+    newArray.unshift(memberNo)
+  }
+
+  return newArray
+}
+
 export const SurveyFormContext = createContext({})
 
 export const SurveyFormContextProvider = ({ children }) => {
@@ -77,37 +87,57 @@ export const SurveyFormContextProvider = ({ children }) => {
       [
         {
           text: "Ok",
-          onPress: () =>  navigation.navigate('Home')
+          onPress: () =>  navigation ? navigation.navigate('Home') : ''
         }
       ]
     );
   }
 
   const handleInputChange = (index, value, array, onChange) => {
-    const newArray = [...array]
+    const updatedArray = [...array]
 
-    if (!newArray[index]) {
-      newArray[index] = {}; 
+    if (!updatedArray[index]) {
+      updatedArray[index] = ''
     }
 
-    newArray[index] = value;
+    updatedArray[index] = value
 
-    onChange(newArray);
+    onChange(updatedArray);
   } 
 
   const submitForm = async (navigation, setLoading) => {
     const questionsAndResponses = [
-      questionsAndAnswerMember1,
-      questionsAndAnswerMember2,
-      questionsAndAnswerMember3,
-      questionsAndAnswerMember4,
-      questionsAndAnswerMember5,
-      questionsAndAnswerMember6,
-      questionsAndAnswerMember7,
-      questionsAndAnswerMember8,
-      questionsAndAnswerMember9,
-      questionsAndAnswerMember10
+      addMemberNumber(questionsAndAnswerMember1, 1),
+      addMemberNumber(questionsAndAnswerMember2, 2),
+      addMemberNumber(questionsAndAnswerMember3, 3),
+      addMemberNumber(questionsAndAnswerMember4, 4),
+      addMemberNumber(questionsAndAnswerMember5, 5),
+      addMemberNumber(questionsAndAnswerMember6, 6),
+      addMemberNumber(questionsAndAnswerMember7, 7),
+      addMemberNumber(questionsAndAnswerMember8, 8),
+      addMemberNumber(questionsAndAnswerMember9, 9),
+      addMemberNumber(questionsAndAnswerMember10, 10)
     ]
+
+    const filledArrayResponses = questionsAndResponses.filter(array => array.length > 0)
+
+    if (Object.values(household)?.some(answer => answer === '')) {
+      return alertMessage('Failed', "Household Information: Submission failed, don't leave empty fields.");
+    }else if (Object.keys(surveyForm).filter((response, idx) => idx >= 0 && idx <= 6).some(response => response === '')) {
+      return alertMessage('Failed', "Survey Information: Submission failed, don't leave empty fields.");
+    }else if (filledArrayResponses.length > 0){
+      if(filledArrayResponses[0].some(response => response === '') || filledArrayResponses[0].length < 50){
+        return alertMessage('Failed', "Household Questions: Submission failed, don't leave empty fields.");
+      }
+
+      for(let i = 1; i <= 10; i++){
+        if(filledArrayResponses[i]?.length > 0){
+          if(filledArrayResponses[i].some(response => response === '')){
+            return alertMessage('Failed', "Household Members: Submission failed, don't leave empty fields.");
+          }
+        }
+      }
+    }
 
     try {
       const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
@@ -152,9 +182,9 @@ export const SurveyFormContextProvider = ({ children }) => {
           house_no: '',
           street: ''
         })
-        alertMessage('Success', 'Survey form submitted successfully', navigation)
+        return alertMessage('Success', 'Survey form submitted successfully', navigation)
       }else{
-        alertMessage('Failed', 'Failed to submit survey form', navigation)
+        return alertMessage('Failed', `Failed to submit survey form, please try again later`)
       }
     } catch (error) {
       return alertMessage('Failed', 'An unexpected error occurred. Please try again later', navigation)

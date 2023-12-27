@@ -8,10 +8,10 @@ import { Ionicons } from '@expo/vector-icons';
 import logoWhite from '../../assets/images/logo-white.png'
 
 const HomeScreen = ({ navigation }) => {
-  const { setToken, user } = useContext(UserContext)
+  const { deleteToken } = useContext(UserContext)
 
   const logout = async () => {
-    await setToken('rbim_token', '')
+    await deleteToken('rbim_token')
     navigation.navigate('Login')
   }
 
@@ -32,7 +32,10 @@ const HomeScreen = ({ navigation }) => {
       </View>
       <View style={styles.bottomContainer}>
         <Text style={styles.text}>Baseline Census for the Establishment of <Text style={{ color: '#008605', fontWeight: 700}}>Registry of Barangay Inhabitants and Migrants</Text></Text>
-        <CustomButton text={"SURVEY FORM"} bColor={'#008605'} bgColor={'transparent'} fgColor={'#008605'} onPress={() => navigation.navigate('SurveyForm')}/>
+        <View style={{ flex: 1, flexDirection: 'column', gap: 8 }}>
+          <CustomButton text={"SURVEY FORM"} bColor={'#008605'} bgColor={'transparent'} fgColor={'#008605'} onPress={() => navigation.navigate('SurveyForm')}/>
+          <CustomButton text={"SURVEY LIST"} bColor={'transparent'} bgColor={'#008605'} fgColor={'#fff'} onPress={() => navigation.navigate('SurveyList')}/>
+        </View>
       </View>
     </View>
   )
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   text: {
-    paddingBottom: 70,
+    paddingBottom: 30,
     fontSize: 30,
     color: '#a5a5a5'
   },

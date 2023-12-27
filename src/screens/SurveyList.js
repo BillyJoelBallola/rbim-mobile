@@ -1,13 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React, { useContext } from 'react'
-import { UserContext } from '../context/UserContext'
+import React from 'react'
 
-const ProfileScreen = () => {
-  const { user } = useContext(UserContext)
-  
+const SurveyList = () => {
   return (
     <View style={styles.root}>
-      <Text>User logged: {user ? user.name : "--"}</Text>
+      <Text>SurveyList</Text>
     </View>
   )
 }
@@ -21,4 +18,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default ProfileScreen
+export default SurveyList
