@@ -51,7 +51,7 @@ const SurveyFormScreen = ({ navigation }) => {
       case 1:
         return <Permission checked={checked} setChecked={setChecked} setActiveScreen={setActiveScreen} navigation={navigation}/>
       case 2:
-        return <Identification setActiveScreen={setActiveScreen}/>
+        return <Identification setActiveScreen={setActiveScreen} navigation={navigation}/>
       case 3:
         return <HousholdMembers setActiveScreen={setActiveScreen}/>
       case 4:

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, Image } from 'react-native'
+import { View, Text, StyleSheet, Pressable, Image, BackHandler } from 'react-native'
 import { useUser } from '../context/UserContext';
 
 import CustomButton from '../components/CustomButton'
@@ -11,10 +11,15 @@ const HomeScreen = ({ navigation }) => {
   const { deleteToken, setUser, user } = useUser()
 
   useEffect(() => {
-    if(user !== null){
-      navigation.navigate('Home')
-    }
-  }, [])
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      if(user){
+        BackHandler.exitApp()
+      }
+      return true;
+    });
+
+    return () => backHandler.remove();
+  }, [user]);
 
   const logout = async () => {
     setUser(null)

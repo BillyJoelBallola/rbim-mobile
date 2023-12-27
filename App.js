@@ -21,8 +21,8 @@ export default function App() {
           <SafeAreaView style={styles.root} >
             <NavigationContainer>
               <Stack.Navigator>
-                <Stack.Screen name='Home' component={HomeScreen} options={{headerShown: false}} />
                 <Stack.Screen name='Login' component={LoginScreen} options={{headerShown: false}} />
+                <Stack.Screen name='Home' component={HomeScreen} options={{headerShown: false}} />
                 <Stack.Screen name='SurveyForm' component={SurveyFormScreen} options={{headerShown: false}} />
                 <Stack.Screen name='SurveyList' component={SurveyList} options={{headerShown: false}} />
                 <Stack.Screen name='Profile' component={ProfileScreen} options={{headerShown: false}} />
@@ -32,7 +32,7 @@ export default function App() {
         </QuestionsContextProvider>
       </SurveyFormContextProvider>
     </UserContextProvider>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -40,4 +40,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff'
   }
-});
+})

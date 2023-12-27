@@ -17,7 +17,7 @@ const LoginScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if(user !== null){
+    if(user){
       navigation.navigate('Home')
     }
   }, [user])

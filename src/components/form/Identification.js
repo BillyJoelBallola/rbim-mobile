@@ -12,7 +12,7 @@ import CustomTitle from '../CustomTitle'
 import { ScrollView } from 'react-native'
 import CustomButton from '../CustomButton'
 
-const Identification = ({ setActiveScreen }) => {
+const Identification = ({ setActiveScreen, navigation }) => {
   const { household, setHousehold } = useContext(SurveyFormContext)
   const [address, setAddress] = useState([])
   const radioBtnData = [
@@ -63,6 +63,8 @@ const Identification = ({ setActiveScreen }) => {
 
       <HeightSpacer size={10}/>
       <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
+      <HeightSpacer size={10}/>
+      <CustomButton text={"CANCEL"} bgColor={'#808080'} onPress={() => navigation.navigate('Home')}/>
     </ScrollView>
   )
 }
