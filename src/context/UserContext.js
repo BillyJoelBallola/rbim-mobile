@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import * as SecureStore from 'expo-secure-store';
 import apiClient from '../api/client'
 
@@ -53,9 +53,14 @@ export const UserContextProvider = ({ children }) => {
         getToken, 
         deleteToken,
         user,
+        setUser
       }}
     >
       {children}
     </UserContext.Provider>
   )
 }
+
+export const useUser = () => {
+  return useContext(UserContext);
+};

@@ -11,27 +11,27 @@ import SurveyFormScreen from './src/screens/SurveyFormScreen'
 import ProfileScreen from './src/screens/ProfileScreen'
 import SurveyList from './src/screens/SurveyList'
 
-export default function App() {
-  const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator()
 
+export default function App() {
   return (
-    <NavigationContainer>
-      <UserContextProvider>
-        <SurveyFormContextProvider>
-          <QuestionsContextProvider>
-            <SafeAreaView style={styles.root} >
+    <UserContextProvider>
+      <SurveyFormContextProvider>
+        <QuestionsContextProvider>
+          <SafeAreaView style={styles.root} >
+            <NavigationContainer>
               <Stack.Navigator>
-                <Stack.Screen name='Login' component={LoginScreen} options={{headerShown: false}} />
                 <Stack.Screen name='Home' component={HomeScreen} options={{headerShown: false}} />
+                <Stack.Screen name='Login' component={LoginScreen} options={{headerShown: false}} />
                 <Stack.Screen name='SurveyForm' component={SurveyFormScreen} options={{headerShown: false}} />
                 <Stack.Screen name='SurveyList' component={SurveyList} options={{headerShown: false}} />
                 <Stack.Screen name='Profile' component={ProfileScreen} options={{headerShown: false}} />
               </Stack.Navigator>
-            </SafeAreaView>
-          </QuestionsContextProvider>
-        </SurveyFormContextProvider>
-      </UserContextProvider>
-    </NavigationContainer>
+            </NavigationContainer>
+          </SafeAreaView>
+        </QuestionsContextProvider>
+      </SurveyFormContextProvider>
+    </UserContextProvider>
   );
 }
 

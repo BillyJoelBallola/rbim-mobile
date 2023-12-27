@@ -1,16 +1,23 @@
-import { useContext } from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native'
-import { UserContext } from '../context/UserContext';
+import { useUser } from '../context/UserContext';
 
 import CustomButton from '../components/CustomButton'
 import { Ionicons } from '@expo/vector-icons';
 
 import logoWhite from '../../assets/images/logo-white.png'
+import { useEffect } from 'react';
 
 const HomeScreen = ({ navigation }) => {
-  const { deleteToken } = useContext(UserContext)
+  const { deleteToken, setUser, user } = useUser()
+
+  useEffect(() => {
+    if(user !== null){
+      navigation.navigate('Home')
+    }
+  }, [])
 
   const logout = async () => {
+    setUser(null)
     await deleteToken('rbim_token')
     navigation.navigate('Login')
   }

@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, Alert } from 'react-native';
-import { UserContext } from '../context/UserContext';
+import {  useUser } from '../context/UserContext';
 import apiClient from '../api/client'
 
 import CustomInput from '../components/CustomInput';
@@ -11,7 +11,7 @@ import LoadingButton from '../components/LoadingButton';
 import Logo from '../../assets/images/RBIM-logo-black.png';
 
 const LoginScreen = ({ navigation }) => {
-  const { setToken, setUpdate, user } = useContext(UserContext)
+  const { setToken, setUpdate, user } = useUser()
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
