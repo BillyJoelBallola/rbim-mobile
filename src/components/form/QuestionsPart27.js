@@ -9,8 +9,9 @@ import Divider from '../Divider'
 import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart27 = ({ setActiveScreen, showSideBar }) => {
+const QuestionsPart27 = ({ setActiveScreen, showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -19,6 +20,7 @@ const QuestionsPart27 = ({ setActiveScreen, showSideBar }) => {
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'F. COMMUNITY TAX CERTIFICATE'} size={16}/>
       <CustomTitle text={'FOR 18 ABOVE'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>

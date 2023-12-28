@@ -10,16 +10,16 @@ import { useEffect } from 'react';
 const HomeScreen = ({ navigation }) => {
   const { deleteToken, setUser, user } = useUser()
 
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      if(user){
-        BackHandler.exitApp()
-      }
-      return true;
-    });
+  // useEffect(() => {
+  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+  //     if(user){
+  //       BackHandler.exitApp()
+  //     }
+  //     return true;
+  //   });
 
-    return () => backHandler.remove();
-  }, [user]);
+  //   return () => backHandler.remove();
+  // }, [user]);
 
   const logout = async () => {
     setUser(null)

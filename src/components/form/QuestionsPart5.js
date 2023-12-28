@@ -8,12 +8,14 @@ import Divider from '../Divider'
 import CustomInput from '../CustomInput'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart5 = ({ setActiveScreen, showSideBar }) => {
+const QuestionsPart5 = ({ setActiveScreen, showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'A. DEMOGRAPHIC CHARACTERISTICS'} size={16}/>
       <CustomTitle text={'FOR ALL HOUSEHOLD MEMEBERS'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>

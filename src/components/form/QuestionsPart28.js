@@ -10,8 +10,9 @@ import CustomInput from '../CustomInput'
 import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart28 = ({ setActiveScreen, showSideBar }) => {
+const QuestionsPart28 = ({ setActiveScreen, showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -20,6 +21,7 @@ const QuestionsPart28 = ({ setActiveScreen, showSideBar }) => {
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'G. SKILLS DEVELOPMENT'} size={16}/>
       <CustomTitle text={'FOR 15 ABOVE'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>

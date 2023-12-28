@@ -10,8 +10,9 @@ import CustomInput from '../CustomInput'
 import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart21 = ({ setActiveScreen, showSideBar }) => {
+const QuestionsPart21 = ({ setActiveScreen, showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -20,6 +21,7 @@ const QuestionsPart21 = ({ setActiveScreen, showSideBar }) => {
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'E. MIGRATION INFORMATION'} size={16}/>
       <CustomTitle text={'FOR ALL HOUSEHOLD MEMBERS'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>

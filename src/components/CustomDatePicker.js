@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
-const CustomDatePicker = ({ selectedDate, onDateChange, mode = 'date' }) => {
+const CustomDatePicker = ({ selectedDate, onDateChange, mode = 'date', disabled }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
 
   const showDatePickerHandler = () => {
@@ -35,7 +35,10 @@ const CustomDatePicker = ({ selectedDate, onDateChange, mode = 'date' }) => {
 
   return (
     <View>
-      <TouchableOpacity onPress={showDatePickerHandler}>
+      <TouchableOpacity 
+          onPress={showDatePickerHandler}
+          disabled={disabled ? disabled : false}
+        >
         <Text style={styles.datePickerText}>
           <DisplayText />
         </Text>

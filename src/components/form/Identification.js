@@ -1,8 +1,9 @@
-import { Image, StyleSheet, View } from 'react-native'
+import { Image, View } from 'react-native'
 import logo from '../../../assets/images/RBIM-logo-black.png'
 import React, { useState, useEffect, useContext } from 'react'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 import apiClient from '../../api/client'
+import { Ionicons } from '@expo/vector-icons';
 
 import CustomInput from '../CustomInput'
 import HeightSpacer from '../spacer/HeightSpacer'
@@ -11,6 +12,7 @@ import CustomGeneralDropdown from '../CustomGeneralDropdown'
 import CustomTitle from '../CustomTitle'
 import { ScrollView } from 'react-native'
 import CustomButton from '../CustomButton'
+import CustomCancelButton from '../CustomCancelButton';
 
 const Identification = ({ setActiveScreen, navigation }) => {
   const { household, setHousehold } = useContext(SurveyFormContext)
@@ -34,6 +36,8 @@ const Identification = ({ setActiveScreen, navigation }) => {
 
   return (
     <ScrollView style={{ flexDirection: 'column', gap: 10 }}>
+      <CustomCancelButton navigation={navigation} />
+
       <Image source={logo}/>
       <HeightSpacer size={20} />
 
@@ -63,12 +67,8 @@ const Identification = ({ setActiveScreen, navigation }) => {
 
       <HeightSpacer size={10}/>
       <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
-      <HeightSpacer size={10}/>
-      <CustomButton text={"CANCEL"} bgColor={'#808080'} onPress={() => navigation.navigate('Home')}/>
     </ScrollView>
   )
 }
-
-const styles = StyleSheet.create({})
 
 export default Identification

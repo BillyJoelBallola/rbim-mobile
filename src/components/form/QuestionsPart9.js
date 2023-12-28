@@ -10,8 +10,9 @@ import CustomInput from '../CustomInput'
 import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart9 = ({ setActiveScreen, showSideBar }) => {
+const QuestionsPart9 = ({ setActiveScreen, showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -20,6 +21,7 @@ const QuestionsPart9 = ({ setActiveScreen, showSideBar }) => {
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'B. ECONOMIC ACTIVITY'} size={16}/>
       <CustomTitle text={'FOR ALL 15 YEARS OLD AND ABOVE'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>

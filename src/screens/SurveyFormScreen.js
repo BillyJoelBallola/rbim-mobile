@@ -53,67 +53,67 @@ const SurveyFormScreen = ({ navigation }) => {
       case 2:
         return <Identification setActiveScreen={setActiveScreen} navigation={navigation}/>
       case 3:
-        return <HousholdMembers setActiveScreen={setActiveScreen}/>
+        return <HousholdMembers setActiveScreen={setActiveScreen} navigation={navigation} />
       case 4:
-        return <QuestionsPart1 setActiveScreen={setActiveScreen} showSideBar={showSideBar} />
+        return <QuestionsPart1 setActiveScreen={setActiveScreen} showSideBar={showSideBar}  navigation={navigation}/>
       case 5:
-        return <QuestionsPart2 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart2 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 6:
-        return <QuestionsPart3 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart3 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 7:
-        return <QuestionsPart4 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart4 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 8:
-        return <QuestionsPart5 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart5 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 9:
-        return <QuestionsPart6 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart6 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 10:
-        return <QuestionsPart7 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart7 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 11:
-        return <QuestionsPart8 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart8 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 12:
-        return <QuestionsPart9 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart9 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 13:
-        return <QuestionsPart10 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart10 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 14:
-        return <QuestionsPart11 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart11 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 15:
-        return <QuestionsPart12 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart12 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 16:
-        return <QuestionsPart13 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart13 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 17:
-        return <QuestionsPart14 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart14 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 18:
-        return <QuestionsPart15 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart15 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 19:
-        return <QuestionsPart16 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart16 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 20:
-        return <QuestionsPart17 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart17 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 21:
-        return <QuestionsPart18 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart18 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 22:
-        return <QuestionsPart19 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart19 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 23:
-        return <QuestionsPart20 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart20 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 24:
-        return <QuestionsPart21 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart21 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 25:
-        return <QuestionsPart22 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart22 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 26:
-        return <QuestionsPart23 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart23 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 27:
-        return <QuestionsPart24 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart24 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 28:
-        return <QuestionsPart25 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart25 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 29:
-        return <QuestionsPart26 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart26 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 30:
-        return <QuestionsPart27 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart27 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 31:
-        return <QuestionsPart28 setActiveScreen={setActiveScreen} showSideBar={showSideBar}/>
+        return <QuestionsPart28 setActiveScreen={setActiveScreen} showSideBar={showSideBar} navigation={navigation}/>
       case 32:
-        return <QuestionsPart29 setActiveScreen={setActiveScreen}/>
+        return <QuestionsPart29 setActiveScreen={setActiveScreen} navigation={navigation}/>
       case 33:
-        return <QuestionsPart30 setActiveScreen={setActiveScreen}/>
+        return <QuestionsPart30 setActiveScreen={setActiveScreen} navigation={navigation}/>
       case 34:
         return <SurveryFormLastScreen setActiveScreen={setActiveScreen} navigation={navigation}/>
     }

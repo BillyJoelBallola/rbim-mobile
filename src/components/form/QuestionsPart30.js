@@ -10,12 +10,14 @@ import TextQuestion from '../TextQuestion'
 import CustomInput from '../CustomInput'
 import CustomDatePicker from '../CustomDatePicker'
 import Divider from '../Divider'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart30 = ({ setActiveScreen }) => {
-  const { surveyForm, setSurveyForm } = useContext(SurveyFormContext)
+const QuestionsPart30 = ({ setActiveScreen, navigation }) => {
+  const { surveyForm, setSurveyForm, surveyFormId } = useContext(SurveyFormContext)
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'B. INTERVIEW INFORMATION'} size={16}/>
       <HeightSpacer size={20}/>
 
@@ -53,6 +55,7 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
         </View>
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
+            disabled={!surveyFormId ? true : false}
             selectedDate={surveyForm?.second_visit_date}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_date: value}))}
           />
@@ -79,6 +82,8 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
         </View>
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
+            mode='time'
+            disabled={!surveyFormId ? true : false}
             selectedDate={surveyForm?.second_visit_time_start}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_time_start: value}))}
           />
@@ -105,6 +110,8 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
         </View>
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
+            mode='time'
+            disabled={!surveyFormId ? true : false}
             selectedDate={surveyForm?.second_visit_time_end}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_time_end: value}))}
           />
@@ -131,6 +138,7 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
         </View>
         <View style={{ width: '49%' }}>
           <CustomDropdown 
+            disabled={!surveyFormId ? true : false}
             selected={surveyForm?.second_visit_result}
             onSelect={value => setSurveyForm(current => ({...current, second_visit_result: value}))}
             data={[{ responseCode: 'C', responseText: 'Completed' }, { responseCode: 'CB', responseText: 'Callback' }, { responseCode: 'R', responseText: 'Refused' }]}
@@ -157,6 +165,7 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
         </View>
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
+            disabled={!surveyFormId ? true : false}
             selectedDate={surveyForm?.second_visit_date_next_visit}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_date_next_visit: value}))}
           />
@@ -183,6 +192,7 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
         </View>
         <View style={{ width: '49%' }}>
           <CustomInput 
+            disabled={!surveyFormId ? false : true}
             value={surveyForm?.second_visit_interviewer}
             setValue={value => setSurveyForm(current => ({...current, second_visit_interviewer: value}))}
             placeholder={'Type here'}
@@ -210,6 +220,7 @@ const QuestionsPart30 = ({ setActiveScreen }) => {
         </View>
         <View style={{ width: '49%' }}>
           <CustomInput 
+            disabled={!surveyFormId ? false : true}
             value={surveyForm?.second_visit_supervisor}
             setValue={value => setSurveyForm(current => ({...current, second_visit_supervisor: value}))}
             placeholder={'Type here'}

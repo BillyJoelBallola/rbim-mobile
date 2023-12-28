@@ -9,8 +9,9 @@ import { useContext } from 'react'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 import { QuestionsContext } from '../../context/QuestionsContext'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart25 = ({ setActiveScreen, showSideBar }) => {
+const QuestionsPart25 = ({ setActiveScreen, showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -19,6 +20,7 @@ const QuestionsPart25 = ({ setActiveScreen, showSideBar }) => {
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'E. MIGRATION INFORMATION'} size={16}/>
       <CustomTitle text={'FOR MIGRANTS AND TRANSIENTS'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>

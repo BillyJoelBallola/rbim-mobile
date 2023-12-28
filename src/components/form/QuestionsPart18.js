@@ -9,8 +9,9 @@ import Divider from '../Divider'
 import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart18 = ({ setActiveScreen, showSideBar }) => {
+const QuestionsPart18 = ({ setActiveScreen, showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -18,6 +19,7 @@ const QuestionsPart18 = ({ setActiveScreen, showSideBar }) => {
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'D. SOCIO-CIVIC PARTICIPATION'} size={16}/>
       <CustomTitle text={'FOR 60 ABOVE'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>

@@ -1,16 +1,17 @@
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import React from 'react'
 
-const CustomInput = ({ value, setValue, secureTextEntry, label, placeholder }) => {
+const CustomInput = ({ width, value, setValue, secureTextEntry, label, placeholder, disabled }) => {
 
   const handleInput = (inputValue) => {
     setValue(inputValue)
   }
 
   return (
-    <View style={{ flexDirection: 'column', gap: 4 }}>
+    <View style={[{ flexDirection: 'column', gap: 4 }, width ? { width: width } : {}]}>
       {label && <Text>{label}</Text>}
       <TextInput
+        editable={!disabled ? disabled : true}
         value={value}
         onChangeText={handleInput}
         placeholder={placeholder}

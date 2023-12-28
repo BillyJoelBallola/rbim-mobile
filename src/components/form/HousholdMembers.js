@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 
 import CustomTitle from '../CustomTitle'
@@ -7,12 +7,15 @@ import CustomInput from '../CustomInput'
 import HeightSpacer from '../spacer/HeightSpacer'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton';
 
-const HousholdMembers = ({ setActiveScreen }) => {
+const HousholdMembers = ({ setActiveScreen, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
+      
       <CustomTitle text={'A. DEMOGRAPHIC CHARACTERISTICS'} size={16}/>
       <CustomTitle text={'FOR ALL HOUSEHOLD MEMEBERS'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>
@@ -41,10 +44,9 @@ const HousholdMembers = ({ setActiveScreen }) => {
       }
       
       <HeightSpacer size={20}/>
-      <CustomButton text={'NEXT'} 
-        onPress={() => setActiveScreen(current => current + 1)}/>
+      <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
       <HeightSpacer size={10}/>
-      <CustomButton text={'PREVIOUS'} bgColor={'#808080'} onPress={() => setActiveScreen(current => current - 1)}/>
+      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => setActiveScreen(current => current - 1)} />
     </ScrollView>
   )
 }

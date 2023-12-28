@@ -17,6 +17,7 @@ export const SurveyFormContext = createContext({})
 
 export const SurveyFormContextProvider = ({ children }) => {
   const { user } = useContext(UserContext)
+  const [surveyFormId, setSurveyFormId] = useState(null)
   const [questionsAndAnswerMember1, setQuestionAndAnswerMember1] = useState([])
   const [questionsAndAnswerMember2, setQuestionAndAnswerMember2] = useState([])
   const [questionsAndAnswerMember3, setQuestionAndAnswerMember3] = useState([])
@@ -105,6 +106,68 @@ export const SurveyFormContextProvider = ({ children }) => {
     onChange(updatedArray);
   } 
 
+  const resetSurvetForm = () => {
+    setQuestionAndAnswerMember1([])
+    setQuestionAndAnswerMember2([])
+    setQuestionAndAnswerMember3([])
+    setQuestionAndAnswerMember4([])
+    setQuestionAndAnswerMember5([])
+    setQuestionAndAnswerMember6([])
+    setQuestionAndAnswerMember7([])
+    setQuestionAndAnswerMember8([])
+    setQuestionAndAnswerMember9([])
+    setQuestionAndAnswerMember10([])
+    setSurveyForm({
+      first_visit_date: '',
+      first_visit_time_start: '',
+      first_visit_time_end: '',
+      first_visit_result: '',
+      first_visit_date_next_visit: '',
+      first_visit_interviewer: '',
+      first_visit_supervisor: '',
+      second_visit_date: '',
+      second_visit_time_start: '',
+      second_visit_time_end: '',
+      second_visit_result: '',
+      second_visit_date_next_visit: '',
+      second_visit_interviewer: '',
+      second_visit_supervisor: '',
+      date_encoded: '',
+      encoder_name: '',
+      supervisor_name: '',
+    })
+    setHousehold({
+      household_number: '',
+      living_type: 'household',
+      respondent_name: '',
+      household_head: '',
+      household_member_no: '',
+      address: '',
+      unit_no: '',
+      house_no: '',
+      street: ''
+    })
+  }
+
+  const cancelSurveyForm = (navigation) => {
+    Alert.alert(
+      'Cancel', 
+      'Are you sure you want to cancel?\nAll the input will be restart',
+      [
+        {
+          text: "No",
+        },
+        {
+          text: "Yes",
+          onPress: () => {
+            resetSurvetForm()
+            navigation.navigate('Home')
+          }
+        }
+      ]
+    );
+  }
+
   const submitForm = async (navigation, setLoading) => {
     const questionsAndResponses = [
       addMemberNumber(questionsAndAnswerMember1, 1),
@@ -123,65 +186,53 @@ export const SurveyFormContextProvider = ({ children }) => {
 
     if (Object.values(household)?.some(answer => answer === '')) {
       return alertMessage('Failed', "Household Information: Submission failed, don't leave empty fields.");
-    }else if (Object.keys(surveyForm).filter((response, idx) => idx >= 0 && idx <= 6).some(response => response === '')) {
+    }
+    
+    if (
+      Object.values(surveyForm).filter((response, idx) => idx >= 0 && idx <= 6).some(response => response === '') &&
+      Object.values(surveyForm).filter((response, idx) => idx >= 7 && idx <= 13).some(response => response === '') 
+    ) {
       return alertMessage('Failed', "Survey Information: Submission failed, don't leave empty fields.");
-    }else if (filledArrayResponses.length > 0){
-      if(filledArrayResponses[0].some(response => response === '') || filledArrayResponses[0].length < 50){
-        return alertMessage('Failed', "Household Questions: Submission failed, don't leave empty fields.");
-      }
-
-      for(let i = 1; i <= 10; i++){
-        if(filledArrayResponses[i]?.length > 0){
-          if(filledArrayResponses[i].some(response => response === '')){
-            return alertMessage('Failed', "Household Members: Submission failed, don't leave empty fields.");
-          }
-        }
-      }
     }
 
+    if(surveyFormId){
+
+      if (Object.values(surveyForm).filter((response, idx) => idx >= 7 && idx <= 13).some(response => response === '')) {
+        return alertMessage('Failed', "Survey Information (Second Visit): Submission failed, don't leave empty fields.");
+      }
+
+      if (filledArrayResponses.length > 0){
+        if(filledArrayResponses[0].some(response => response === '') || filledArrayResponses[0].length < 65){
+          return alertMessage('Failed', "Household Questions: Submission failed, don't leave empty fields.");
+        }
+  
+        for(let i = 1; i <= 10; i++){
+          if(filledArrayResponses[i]?.length > 0){
+            if(filledArrayResponses[i].some(response => response === '')){
+              return alertMessage('Failed', "Household Members: Submission failed, don't leave empty fields.");
+            }
+          }
+        }
+      }else {
+        return alertMessage('Failed', "Household Members: Survey form must have atleast one[1] HH members.");
+      }
+
+    }else{
+
+      if(filledArrayResponses.length <= 0){
+        return alertMessage('Failed', "Household Members: Survey form must have atleast one[1] HH members.");
+      }
+
+      if(Object.values(surveyForm).filter((key, idx) => idx >= 0 && idx <= 6).some(response => response === '')){
+        return alertMessage('Failed', "Survey Information (First Visit): Submission failed, don't leave empty fields.");
+      }   
+      
+    }
+      
     try {
       const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
       if(data.success){
-        setQuestionAndAnswerMember1([])
-        setQuestionAndAnswerMember2([])
-        setQuestionAndAnswerMember3([])
-        setQuestionAndAnswerMember4([])
-        setQuestionAndAnswerMember5([])
-        setQuestionAndAnswerMember6([])
-        setQuestionAndAnswerMember7([])
-        setQuestionAndAnswerMember8([])
-        setQuestionAndAnswerMember9([])
-        setQuestionAndAnswerMember10([])
-        setSurveyForm({
-          first_visit_date: '',
-          first_visit_time_start: '',
-          first_visit_time_end: '',
-          first_visit_result: '',
-          first_visit_date_next_visit: '',
-          first_visit_interviewer: '',
-          first_visit_supervisor: '',
-          second_visit_date: '',
-          second_visit_time_start: '',
-          second_visit_time_end: '',
-          second_visit_result: '',
-          second_visit_date_next_visit: '',
-          second_visit_interviewer: '',
-          second_visit_supervisor: '',
-          date_encoded: '',
-          encoder_name: '',
-          supervisor_name: '',
-        })
-        setHousehold({
-          household_number: '',
-          living_type: 'household',
-          respondent_name: '',
-          household_head: '',
-          household_member_no: '',
-          address: '',
-          unit_no: '',
-          house_no: '',
-          street: ''
-        })
+        resetSurvetForm()
         return alertMessage('Success', 'Survey form submitted successfully', navigation)
       }else{
         return alertMessage('Failed', `Failed to submit survey form, please try again later`)
@@ -202,7 +253,10 @@ export const SurveyFormContextProvider = ({ children }) => {
         membersData,
         surveyForm,
         setSurveyForm,
-        submitForm
+        submitForm,
+        surveyFormId, 
+        setSurveyFormId,
+        cancelSurveyForm 
       }}
     >
       {children}

@@ -9,8 +9,9 @@ import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
 import CustomInput from '../CustomInput'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart29 = ({ setActiveScreen }) => {
+const QuestionsPart29 = ({ setActiveScreen, navigation}) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions }  = useContext(QuestionsContext)
     
@@ -27,6 +28,7 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'H. QUESTIONS FOR THE HOUSEHOLD'} size={16}/>
       <HeightSpacer size={20}/>
 
@@ -38,14 +40,14 @@ const QuestionsPart29 = ({ setActiveScreen }) => {
           />  
           <HeightSpacer size={10}/>
           <CustomDropdown
-             data={question45Data?.responses}
-             selected={membersData[0]?.questionsAndAnswer[49] || ''}
-             onSelect={value => 
-              handleInputChange(49, 
-                value, 
-                membersData[0]?.questionsAndAnswer, 
-                membersData[0]?.setQuestionAndAnswer
-              )
+              data={question45Data?.responses}
+              selected={membersData[0]?.questionsAndAnswer[49] || ''}
+              onSelect={value => 
+                handleInputChange(49, 
+                  value, 
+                  membersData[0]?.questionsAndAnswer, 
+                  membersData[0]?.setQuestionAndAnswer
+                )
             }
           />
         </View>

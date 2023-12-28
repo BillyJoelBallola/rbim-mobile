@@ -9,7 +9,7 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const CustomDropdown = ({ data, selected, onSelect, label }) => {
+const CustomDropdown = ({ data, selected, onSelect, label, disabled }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(selected || null);
   const [customInput, setCustomInput] = useState('');
@@ -39,6 +39,7 @@ const CustomDropdown = ({ data, selected, onSelect, label }) => {
       {label && <Text>{label}</Text>}
       <View style={styles.container}>
         <TouchableOpacity
+          disabled={disabled ? disabled : false}
           style={styles.dropdownButton}
           onPress={() => setModalVisible(true)}
         >

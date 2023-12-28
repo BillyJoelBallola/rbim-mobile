@@ -9,8 +9,9 @@ import Divider from '../Divider'
 import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
+import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart14 = ({ setActiveScreen, showSideBar }) => {
+const QuestionsPart14 = ({ setActiveScreen, showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -19,6 +20,7 @@ const QuestionsPart14 = ({ setActiveScreen, showSideBar }) => {
 
   return (
     <ScrollView>
+      <CustomCancelButton navigation={navigation} />
       <CustomTitle text={'C. HEALTH INFORMATION'} size={16}/>
       <CustomTitle text={'FOR WOMEN 10-54 YEARS OLD'} fgColor={'#008605'} size={14}/>
       <HeightSpacer size={20}/>
