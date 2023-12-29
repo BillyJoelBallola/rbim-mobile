@@ -17,6 +17,8 @@ const CustomInput = ({ width, value, setValue, secureTextEntry, label, placehold
         placeholder={placeholder}
         style={styles.input}
         secureTextEntry={secureTextEntry}
+        numberOfLines={1} 
+        ellipsizeMode="tail"
       />
     </View>
   )

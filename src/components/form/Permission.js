@@ -4,7 +4,7 @@ import CustomCheckBox from '../CustomCheckBox'
 import CustomButton from '../CustomButton'
 import HeightSpacer from '../spacer/HeightSpacer'
 
-const Permission = ({ checked, setChecked, setActiveScreen, navigation }) => {
+const Permission = ({ checked, setChecked, navigation }) => {
   const alertMessage = () => {
     Alert.alert(
       'Failed', 
@@ -30,7 +30,7 @@ const Permission = ({ checked, setChecked, setActiveScreen, navigation }) => {
         </View>
         <View style={{ marginBottom: 60 }}>
           <CustomCheckBox setChecked={setChecked} checked={checked} label={"Pinahihintulutan ang panayam"}/>
-          <CustomButton text={'CONTINUE'} onPress={() => checked ? setActiveScreen(current => current + 1) : alertMessage()}/>
+          <CustomButton text={'CONTINUE'} onPress={() => checked ? navigation.navigate('SurveyForm', { tab: 2 }) : alertMessage() }/>
           <HeightSpacer size={10} />
         </View>
       </View>

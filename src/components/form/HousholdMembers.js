@@ -9,7 +9,7 @@ import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
 import CustomCancelButton from '../CustomCancelButton';
 
-const HousholdMembers = ({ setActiveScreen, navigation }) => {
+const HousholdMembers = ({ navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
 
   return (
@@ -44,9 +44,9 @@ const HousholdMembers = ({ setActiveScreen, navigation }) => {
       }
       
       <HeightSpacer size={20}/>
-      <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
+      <CustomButton text={"NEXT"} onPress={() => navigation.navigate('SurveyForm', { tab: 4 })}/>
       <HeightSpacer size={10}/>
-      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => setActiveScreen(current => current - 1)} />
+      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => navigation.navigate('SurveyForm', { tab: 2 })} />
     </ScrollView>
   )
 }

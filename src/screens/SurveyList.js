@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Ionicons } from '@expo/vector-icons';
 import apiClient from '../api/client'
 import moment from 'moment'
@@ -7,12 +7,19 @@ import moment from 'moment'
 import CustomInput from '../components/CustomInput'
 import HeightSpacer from '../components/spacer/HeightSpacer'
 import { Divider } from 'react-native-paper'
+import { SurveyFormContext } from '../context/SurveryFormContext';
 
 const SurveyFormInfo = ({formId, navigation, respondent, address, address_id, firstVisitDate, secondVisitDate, firstVisitResult, secondVisitResult}) => {
   const filteredAddress = address?.find(item => item.id === address_id)
+  const { setSurveyFormId } = useContext(SurveyFormContext)
+ 
+  const handleSelectSurveyForm = () => {
+    setSurveyFormId(formId || null)
+    navigation.navigate('SurveyForm', { tab: 2 })
+  }
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+    <TouchableOpacity onPress={handleSelectSurveyForm}>
       <View style={{ borderRadius: 10, backgroundColor: '#f1f1f1', width: '100%', padding: 15, marginBottom: 10 }}>
         <Text style={{ fontSize: 16, fontWeight: 600 }}>{respondent}</Text>
         <Text>{filteredAddress?.barangay}, {filteredAddress?.municipal}, {filteredAddress?.province}</Text>
@@ -32,7 +39,7 @@ const SurveyFormInfo = ({formId, navigation, respondent, address, address_id, fi
           <View style={{ width: '50%' }}>
             <Text style={{ fontWeight: 600 }}>Second Visit</Text>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text>{secondVisitDate !== '0000-00-00' ? moment(secondVisitDate).format("ll") + ' - ' : "yyyy-mm-dd - "}</Text>
+              <Text>{secondVisitDate !== '0000-00-00' && secondVisitDate ? moment(secondVisitDate).format("ll") + ' - ' : "yyyy-mm-dd - "}</Text>
               <Text>{secondVisitResult ? secondVisitResult : "--"}</Text>
             </View>
           </View>
@@ -45,9 +52,16 @@ const SurveyFormInfo = ({formId, navigation, respondent, address, address_id, fi
 const SurveyList = ({ navigation }) => {
   const [surveyForms, setSurveyForms] = useState([])
   const [address, setAddress] = useState([])
+  const [query, setQuery] = useState('')
 
   const date = new Date()
   const currentYear = date.toString().slice(11, 15)
+
+  console.log(surveyForms);
+
+  const filteredData = surveyForms.filter(item => {
+    return item?.respondent_name?.toLowerCase()?.includes(query.toLowerCase())
+  })
 
   useEffect(() => {
     const fetchSurveyForms = async () => {
@@ -71,6 +85,7 @@ const SurveyList = ({ navigation }) => {
   return (
     <View style={styles.root}>
       <Text style={{ fontSize: 34, fontWeight: 600 }}>Search</Text>
+      <Text style={{ fontSize: 14 }}>The list of available survey forms includes only those conducted in the current year.</Text>
       
       <HeightSpacer size={20}/>
 
@@ -78,26 +93,32 @@ const SurveyList = ({ navigation }) => {
         <TouchableOpacity style={{ width: '10%' }} onPress={() => navigation.navigate('Home')}>
           <Ionicons name='arrow-back-sharp' size={30} />
         </TouchableOpacity>
-        <CustomInput placeholder={'Type to search'} width={'90%'}/>
+        <CustomInput
+          value={query}
+          setValue={setQuery} 
+          placeholder={'Type to search using names'} 
+          width={'90%'}
+        />
       </View>
 
       <HeightSpacer size={20}/>
 
       <FlatList 
-        data={surveyForms}
-        renderItem={({item}) => {
-          return <SurveyFormInfo 
-                  navigation={navigation}
-                  formId={item.survey_form_id}
-                  respondent={item.respondent_name} 
-                  address={address} 
-                  address_id={item.address} 
-                  firstVisitDate={item.first_visit_date} 
-                  secondVisitDate={item.second_visit_date} 
-                  firstVisitResult={item.first_visit_result} 
-                  secondVisitResult={item.second_visit_result} 
-                />
-        }}
+        data={filteredData}
+        renderItem={({item}) => (
+          <SurveyFormInfo 
+            navigation={navigation}
+            formId={item.survey_form_id}
+            respondent={item.respondent_name} 
+            address={address} 
+            address_id={item.address} 
+            firstVisitDate={item.first_visit_date} 
+            secondVisitDate={item.second_visit_date} 
+            firstVisitResult={item.first_visit_result} 
+            secondVisitResult={item.second_visit_result} 
+          />
+        )}
+        ListEmptyComponent={<Text>No survey forms found.</Text>}
         keyExtractor={item => item.survey_form_id}
       />
     </View>

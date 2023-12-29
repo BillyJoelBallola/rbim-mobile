@@ -11,7 +11,7 @@ import CustomDatePicker from '../CustomDatePicker'
 import TextQuestion from '../TextQuestion'
 import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart2 = ({ setActiveScreen, showSideBar, navigation }) => {
+const QuestionsPart2 = ({ showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
 
   return (
@@ -62,7 +62,7 @@ const QuestionsPart2 = ({ setActiveScreen, showSideBar, navigation }) => {
                 </View>
                 <View style={{ width: '40%' }}>
                   <CustomDatePicker
-                    selectedDate={member.questionsAndAnswer[4] || ''}
+                    selectedDate={member.questionsAndAnswer[4] ? new Date(member.questionsAndAnswer[4]) : null}
                     onDateChange={(value) => 
                       handleInputChange(4, 
                         value, 
@@ -79,9 +79,9 @@ const QuestionsPart2 = ({ setActiveScreen, showSideBar, navigation }) => {
       ))}
   
       <HeightSpacer size={20}/>
-      <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
+      <CustomButton text={"NEXT"} onPress={() => navigation.navigate('SurveyForm', { tab: 6 })}/>
       <HeightSpacer size={10}/>
-      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => setActiveScreen(current => current - 1)} />
+      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => navigation.navigate('SurveyForm', { tab: 4 })}/>
     </ScrollView>
   )
 }

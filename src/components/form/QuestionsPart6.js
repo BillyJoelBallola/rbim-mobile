@@ -6,14 +6,12 @@ import { SurveyFormContext } from '../../context/SurveryFormContext'
 import CustomTitle from '../CustomTitle'
 import HeightSpacer from '../spacer/HeightSpacer'
 import Divider from '../Divider'
-import CustomInput from '../CustomInput'
 import CustomDropdown from '../CustomDropdown'
 import CustomButton from '../CustomButton'
-import CustomDatePicker from '../CustomDatePicker'
 import TextQuestion from '../TextQuestion'
 import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart6 = ({ setActiveScreen, showSideBar, navigation }) => {
+const QuestionsPart6 = ({ showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -70,9 +68,9 @@ const QuestionsPart6 = ({ setActiveScreen, showSideBar, navigation }) => {
 
 
       <HeightSpacer size={20}/>
-      <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
+      <CustomButton text={"NEXT"} onPress={() => navigation.navigate('SurveyForm', { tab: 10 })}/>
       <HeightSpacer size={10}/>
-      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => setActiveScreen(current => current - 1)} />
+      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => navigation.navigate('SurveyForm', { tab: 8 })} />
     </ScrollView>
   )
 }

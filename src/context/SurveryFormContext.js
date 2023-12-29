@@ -18,6 +18,7 @@ export const SurveyFormContext = createContext({})
 export const SurveyFormContextProvider = ({ children }) => {
   const { user } = useContext(UserContext)
   const [surveyFormId, setSurveyFormId] = useState(null)
+  const [update, setUpdate] = useState(null)
   const [questionsAndAnswerMember1, setQuestionAndAnswerMember1] = useState([])
   const [questionsAndAnswerMember2, setQuestionAndAnswerMember2] = useState([])
   const [questionsAndAnswerMember3, setQuestionAndAnswerMember3] = useState([])
@@ -80,6 +81,22 @@ export const SurveyFormContextProvider = ({ children }) => {
     { questionsAndAnswer: questionsAndAnswerMember9, setQuestionAndAnswer: setQuestionAndAnswerMember9 },
     { questionsAndAnswer: questionsAndAnswerMember10, setQuestionAndAnswer: setQuestionAndAnswerMember10 },
   ];
+
+  const getQuestionsAndResponsesOfMember = (response, memberNo) => {
+    const result = []
+
+    if(response.length > 0){
+      response.forEach(item => {
+        if(item.member_no === memberNo){
+          const responseKeys = Object.keys(item).filter(itemKey => itemKey.includes('Q'))
+          const valuesOfFilteredKeys = responseKeys.map(filteredKey => item[filteredKey]);
+          result.push(...valuesOfFilteredKeys, item.id)
+        }
+      })
+    }
+    
+    return result
+  }
 
   const alertMessage = (title, message, navigation) => {
     Alert.alert(
@@ -161,6 +178,7 @@ export const SurveyFormContextProvider = ({ children }) => {
           text: "Yes",
           onPress: () => {
             resetSurvetForm()
+            setSurveyForm(null)
             navigation.navigate('Home')
           }
         }
@@ -197,7 +215,7 @@ export const SurveyFormContextProvider = ({ children }) => {
 
     if(surveyFormId){
 
-      if (Object.values(surveyForm).filter((response, idx) => idx >= 7 && idx <= 13).some(response => response === '')) {
+      if (Object.values(surveyForm).filter((response, idx) => idx >= 7 && idx <= 13).some(response => response === '' || response?.includes('0'))) {
         return alertMessage('Failed', "Survey Information (Second Visit): Submission failed, don't leave empty fields.");
       }
 
@@ -217,6 +235,20 @@ export const SurveyFormContextProvider = ({ children }) => {
         return alertMessage('Failed', "Household Members: Survey form must have atleast one[1] HH members.");
       }
 
+      try {
+        const { data } = await apiClient.put('/survey_form', { household, surveyForm, questionsAndResponses })
+        if(data.success){
+          resetSurvetForm()
+          return alertMessage('Success', 'Survey form saved changes successfully', navigation)
+        }else{
+          return alertMessage('Failed', `Failed to save changes of survey form, please try again later`)
+        }
+      } catch (error) {
+        return alertMessage('Failed', 'An unexpected error occurred. Please try again later', navigation)
+      } finally {
+        setLoading(false)
+      }
+
     }else{
 
       if(filledArrayResponses.length <= 0){
@@ -227,22 +259,24 @@ export const SurveyFormContextProvider = ({ children }) => {
         return alertMessage('Failed', "Survey Information (First Visit): Submission failed, don't leave empty fields.");
       }   
       
-    }
-      
-    try {
-      const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
-      if(data.success){
-        resetSurvetForm()
-        return alertMessage('Success', 'Survey form submitted successfully', navigation)
-      }else{
-        return alertMessage('Failed', `Failed to submit survey form, please try again later`)
+      try {
+        const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
+        if(data.success){
+          resetSurvetForm()
+          return alertMessage('Success', 'Survey form submitted successfully', navigation)
+        }else{
+          return alertMessage('Failed', `Failed to submit survey form, please try again later`)
+        }
+      } catch (error) {
+        return alertMessage('Failed', 'An unexpected error occurred. Please try again later', navigation)
+      } finally {
+        setLoading(false)
       }
-    } catch (error) {
-      return alertMessage('Failed', 'An unexpected error occurred. Please try again later', navigation)
-    } finally {
-      setLoading(false)
+
     }
   }
+
+  // console.log(JSON.stringify(surveyForm, null, 2));
 
   return (
     <SurveyFormContext.Provider 
@@ -256,7 +290,10 @@ export const SurveyFormContextProvider = ({ children }) => {
         submitForm,
         surveyFormId, 
         setSurveyFormId,
-        cancelSurveyForm 
+        cancelSurveyForm,
+        getQuestionsAndResponsesOfMember,
+        update,
+        setUpdate
       }}
     >
       {children}

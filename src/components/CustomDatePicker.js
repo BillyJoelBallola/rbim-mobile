@@ -1,32 +1,29 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 const CustomDatePicker = ({ selectedDate, onDateChange, mode = 'date', disabled }) => {
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const defaultDate = selectedDate ? selectedDate : new Date();
 
-  const showDatePickerHandler = () => {
-    setShowDatePicker(true);
-  };
+  console.log(selectedDate);
 
-  const hideDatePickerHandler = () => {
+  const onDateChangeHandler = (e, value) => {
+    const currentDate = value;
     setShowDatePicker(false);
-  };
-
-  const onDateChangeHandler = (event, selected) => {
-    hideDatePickerHandler();
-    onDateChange(selected);
+    onDateChange(currentDate);
   };
 
   const DisplayText = () => {
     switch (mode) {
       case 'date':
         return selectedDate ?
-        selectedDate.toDateString() : 
+        moment(selectedDate).format("ll") : 
         'Select Date'
       case 'time':
         return selectedDate ?
-        selectedDate.toLocaleString('en-US').substring(12,24) : 
+        moment(selectedDate).format("LT"): 
         'Select Time'
       default:
         break;
@@ -36,18 +33,18 @@ const CustomDatePicker = ({ selectedDate, onDateChange, mode = 'date', disabled 
   return (
     <View>
       <TouchableOpacity 
-          onPress={showDatePickerHandler}
-          disabled={disabled ? disabled : false}
-        >
-        <Text style={styles.datePickerText}>
+        onPress={() => setShowDatePicker(true)}
+        disabled={disabled ? disabled : false}
+      >
+        <Text style={styles.datePickerText} numberOfLines={1} ellipsizeMode="tail">
           <DisplayText />
         </Text>
       </TouchableOpacity>
 
       {showDatePicker && (
         <DateTimePicker
-          value={selectedDate || new Date()}
-          mode={mode}
+          mode={mode === 'time' ? 'time' : 'date'}
+          value={defaultDate}
           onChange={onDateChangeHandler}
         />
       )}

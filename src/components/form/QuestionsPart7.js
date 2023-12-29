@@ -11,7 +11,7 @@ import CustomButton from '../CustomButton'
 import TextQuestion from '../TextQuestion'
 import CustomCancelButton from '../CustomCancelButton'
 
-const QuestionsPart7 = ({ setActiveScreen, showSideBar, navigation }) => {
+const QuestionsPart7 = ({ showSideBar, navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
   const { questions } = useContext(QuestionsContext)
 
@@ -84,9 +84,9 @@ const QuestionsPart7 = ({ setActiveScreen, showSideBar, navigation }) => {
       }
 
       <HeightSpacer size={20}/>
-      <CustomButton text={"NEXT"} onPress={() => setActiveScreen(current => current + 1)}/>
+      <CustomButton text={"NEXT"} onPress={() => navigation.navigate('SurveyForm', { tab: 11 })}/>
       <HeightSpacer size={10}/>
-      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => setActiveScreen(current => current - 1)} />
+      <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => navigation.navigate('SurveyForm', { tab: 9 })} />
     </ScrollView>
   )
 }

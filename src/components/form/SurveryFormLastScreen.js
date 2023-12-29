@@ -8,9 +8,9 @@ import CustomButton from '../CustomButton'
 import succesImage from '../../../assets/images/success-image.png'
 import LoadingButton from '../LoadingButton'
 
-const SurveryFormLastScreen = ({ setActiveScreen, navigation }) => {
+const SurveryFormLastScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false)
-  const { submitForm } = useContext(SurveyFormContext)
+  const { submitForm, surveyFormId } = useContext(SurveyFormContext)
 
   const alertMessage = () => {
     Alert.alert(
@@ -33,16 +33,16 @@ const SurveryFormLastScreen = ({ setActiveScreen, navigation }) => {
         <Image source={succesImage} style={{ width: 250, height: 270 }}/>
       </View>
       <HeightSpacer size={80}/>
-      <Text style={{ fontSize: 14, textAlign: 'justify'}}>Please carefully review the survey form before submitting. Any mistakes, such as typos or empty fields, cannot be corrected afterward. If you have any concerns, kindly inform your supervisor.</Text>
+      <Text style={{ fontSize: 14, textAlign: 'justify'}}>Before submitting, please review the survey form carefully. Your diligence in ensuring accuracy is valued. Thank you.</Text>
       <HeightSpacer size={10}/>
       {
         loading ?
         <LoadingButton bgColor={'transparent'} color={'#008605'} borderColor={'#008605'} />
         :
-        <CustomButton disable={loading ? true : false} text={"SUBMIT"} bgColor={'transparent'} fgColor={'#008605'} bColor={'#008605'} onPress={() => alertMessage()} />
+        <CustomButton disable={loading ? true : false} text={surveyFormId ? "SAVE CHANGES" :"SUBMIT"} bgColor={'transparent'} fgColor={'#008605'} bColor={'#008605'} onPress={() => alertMessage()} />
       }
       <HeightSpacer size={10}/>
-      <CustomButton text={"GO BACK"} bgColor={'#808080'} onPress={() => setActiveScreen(current => current - 1)}/>
+      <CustomButton text={"GO BACK"} bgColor={'#808080'} onPress={() => navigation.navigate('SurveyForm', { tab: 33 })}/>
     </View>
   )
 }

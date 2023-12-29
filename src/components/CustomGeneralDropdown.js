@@ -42,7 +42,7 @@ const CustomGeneralDropdown = ({ data, selected, onSelect, label }) => {
           style={styles.dropdownButton}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.dropdownText}>
+          <Text style={styles.dropdownText} numberOfLines={1} ellipsizeMode="tail">
             {selectedOption ? `${selectedOption.barangay}, ${selectedOption.municipal}, ${selectedOption.province},` : 'Select an option'}
           </Text>
         </TouchableOpacity>

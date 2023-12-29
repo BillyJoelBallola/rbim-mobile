@@ -10,16 +10,16 @@ import { useEffect } from 'react';
 const HomeScreen = ({ navigation }) => {
   const { deleteToken, setUser, user } = useUser()
 
-  // useEffect(() => {
-  //   const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-  //     if(user){
-  //       BackHandler.exitApp()
-  //     }
-  //     return true;
-  //   });
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+      if(user){
+        BackHandler.exitApp()
+      }
+      return true;
+    });
 
-  //   return () => backHandler.remove();
-  // }, [user]);
+    return () => backHandler.remove();
+  }, [user]);
 
   const logout = async () => {
     setUser(null)
@@ -45,7 +45,7 @@ const HomeScreen = ({ navigation }) => {
       <View style={styles.bottomContainer}>
         <Text style={styles.text}>Baseline Census for the Establishment of <Text style={{ color: '#008605', fontWeight: 700}}>Registry of Barangay Inhabitants and Migrants</Text></Text>
         <View style={{ flex: 1, flexDirection: 'column', gap: 8 }}>
-          <CustomButton text={"SURVEY FORM"} bColor={'#008605'} bgColor={'transparent'} fgColor={'#008605'} onPress={() => navigation.navigate('SurveyForm')}/>
+          <CustomButton text={"SURVEY FORM"} bColor={'#008605'} bgColor={'transparent'} fgColor={'#008605'} onPress={() => navigation.navigate('SurveyForm', { tab: 1 })}/>
           <CustomButton text={"SURVEY LIST"} bColor={'transparent'} bgColor={'#008605'} fgColor={'#fff'} onPress={() => navigation.navigate('SurveyList')}/>
         </View>
       </View>
