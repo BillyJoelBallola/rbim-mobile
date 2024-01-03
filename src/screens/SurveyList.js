@@ -57,8 +57,6 @@ const SurveyList = ({ navigation }) => {
   const date = new Date()
   const currentYear = date.toString().slice(11, 15)
 
-  console.log(surveyForms);
-
   const filteredData = surveyForms.filter(item => {
     return item?.respondent_name?.toLowerCase()?.includes(query.toLowerCase())
   })

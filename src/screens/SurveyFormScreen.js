@@ -42,7 +42,7 @@ import { SurveyFormContext } from '../context/SurveryFormContext'
 const SurveyFormScreen = ({ navigation, route }) => {
   const [show, setShow] = useState(false)
   const [checked, setChecked] = useState(false)
-  const { surveyFormId, setSurveyForm, setHousehold, membersData, getQuestionsAndResponsesOfMember, update, setUpdate} = useContext(SurveyFormContext)
+  const { surveyFormId, setSurveyForm, setHousehold, membersData, getQuestionsAndResponsesOfMember, update, setUpdate } = useContext(SurveyFormContext)
   const { tab } = route?.params
 
   useEffect(() => {

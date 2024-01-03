@@ -71,7 +71,7 @@ const QuestionsPart11 = ({ showSideBar, navigation }) => {
                   </View>
                   <View style={{ width: '40%' }}>
                     <CustomDropdown 
-                      data={question19Data.responses}
+                      data={question20Data.responses}
                       selected={member.questionsAndAnswer[19] || ''}
                       onSelect={value => 
                         handleInputChange(19, 

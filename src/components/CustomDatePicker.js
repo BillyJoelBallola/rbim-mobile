@@ -7,8 +7,6 @@ const CustomDatePicker = ({ selectedDate, onDateChange, mode = 'date', disabled 
   const [showDatePicker, setShowDatePicker] = useState(false);
   const defaultDate = selectedDate ? selectedDate : new Date();
 
-  console.log(selectedDate);
-
   const onDateChangeHandler = (e, value) => {
     const currentDate = value;
     setShowDatePicker(false);

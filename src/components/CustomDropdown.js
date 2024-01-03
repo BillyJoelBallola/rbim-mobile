@@ -11,16 +11,19 @@ import {
 
 const CustomDropdown = ({ data, selected, onSelect, label, disabled }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(selected || null);
+  const [selectedOption, setSelectedOption] = useState(null);
   const [customInput, setCustomInput] = useState('');
 
   useEffect(() => {
-    const selectedResponse = data.find(item => item.responseCode === selected) 
-    setSelectedOption(selectedResponse || null);
-  }, [selected]);
+    if(data?.length > 0){
+      const selectedResponse = data?.find(item => item?.responseCode?.toString() === selected?.toString()) 
+      setSelectedOption(selectedResponse === undefined ? selected : selectedResponse)
+    }
+  }, [selected, data])
 
   const handleSelect = (code) => {
     const selectedResponse = data.find(item => item.responseCode === code) 
+    if(customInput) setCustomInput('')
     setSelectedOption(selectedResponse);
     setModalVisible(false);
     onSelect(code);
@@ -34,6 +37,18 @@ const CustomDropdown = ({ data, selected, onSelect, label, disabled }) => {
     }
   };
 
+  const getDisplayValue = () => {
+    if (selectedOption) {
+      if (typeof selectedOption === 'string') {
+        return selectedOption;
+      } else if (typeof selectedOption === 'object') {
+        return `${selectedOption.responseCode} - ${selectedOption.responseText}`;
+      }
+    } else {
+      return 'Select an option';
+    }
+  };
+
   return (
     <View style={{ flexDirection: 'column', gap: 4 }}>
       {label && <Text>{label}</Text>}
@@ -44,7 +59,7 @@ const CustomDropdown = ({ data, selected, onSelect, label, disabled }) => {
           onPress={() => setModalVisible(true)}
         >
           <Text style={styles.dropdownText} numberOfLines={1} ellipsizeMode="tail">
-            {selectedOption ? `${selectedOption.responseCode} - ${selectedOption.responseText}` : 'Select an option'}
+            {getDisplayValue()}
           </Text>
         </TouchableOpacity>
 

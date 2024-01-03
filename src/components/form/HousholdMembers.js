@@ -28,7 +28,7 @@ const HousholdMembers = ({ navigation }) => {
             <HeightSpacer size={10}/>
             <CustomInput 
               label={`#${idx + 1} Member`} 
-              placeholder={'Surname, First name, Middle name'} 
+              placeholder={'Surname, First Name, Middle Name/Initial'} 
               value={member.questionsAndAnswer[0] || ''} 
               setValue={(value) => 
                 handleInputChange(

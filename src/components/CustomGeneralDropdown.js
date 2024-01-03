@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
-  TextInput,
   Modal,
   TouchableOpacity,
   FlatList,
@@ -12,12 +11,13 @@ import {
 const CustomGeneralDropdown = ({ data, selected, onSelect, label }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-  const [customInput, setCustomInput] = useState('');
 
   useEffect(() => {
-    const selectedItem = data.find(item => item.id === selected);
-    setSelectedOption(selectedItem || null);
-  }, [selected]);
+    if(data?.length > 0){
+      const selectedItem = data?.find(item => item?.id?.toString() === selected?.toString());
+      setSelectedOption(selectedItem || null);
+    }
+  }, [selected, data]);
 
   const handleSelect = (id) => {
     const selectedItem = data.find(item => item.id === id);
@@ -25,15 +25,6 @@ const CustomGeneralDropdown = ({ data, selected, onSelect, label }) => {
     setModalVisible(false);
     onSelect(id);
   };
-
-  const handleCustomInput = () => {
-    if (customInput.trim() !== '') {
-      setSelectedOption(customInput);
-      setModalVisible(false);
-      onSelect(customInput);
-    }
-  };
-
   return (
     <View style={{ flexDirection: 'column', gap: 4 }}>
       { label && <Text>{label}</Text> }
@@ -43,7 +34,7 @@ const CustomGeneralDropdown = ({ data, selected, onSelect, label }) => {
           onPress={() => setModalVisible(true)}
         >
           <Text style={styles.dropdownText} numberOfLines={1} ellipsizeMode="tail">
-            {selectedOption ? `${selectedOption.barangay}, ${selectedOption.municipal}, ${selectedOption.province},` : 'Select an option'}
+            {selectedOption ? `${selectedOption.barangay}, ${selectedOption.municipal}, ${selectedOption.province}` : 'Select an option'}
           </Text>
         </TouchableOpacity>
 
@@ -68,20 +59,6 @@ const CustomGeneralDropdown = ({ data, selected, onSelect, label }) => {
                   </TouchableOpacity>
                 )}
               />
-
-              <TextInput
-                style={styles.input}
-                placeholder="Type your own answer"
-                value={customInput}
-                onChangeText={(text) => setCustomInput(text)}
-              />
-
-              <TouchableOpacity
-                style={styles.submitButton}
-                onPress={handleCustomInput}
-              >
-                <Text style={styles.submitButtonText}>Submit</Text>
-              </TouchableOpacity>
             </View>
           </View>
         </Modal>

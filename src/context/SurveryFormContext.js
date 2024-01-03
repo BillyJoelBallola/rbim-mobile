@@ -178,7 +178,7 @@ export const SurveyFormContextProvider = ({ children }) => {
           text: "Yes",
           onPress: () => {
             resetSurvetForm()
-            setSurveyForm(null)
+            setSurveyFormId(null)
             navigation.navigate('Home')
           }
         }
@@ -239,6 +239,7 @@ export const SurveyFormContextProvider = ({ children }) => {
         const { data } = await apiClient.put('/survey_form', { household, surveyForm, questionsAndResponses })
         if(data.success){
           resetSurvetForm()
+          setUpdate('changes')
           return alertMessage('Success', 'Survey form saved changes successfully', navigation)
         }else{
           return alertMessage('Failed', `Failed to save changes of survey form, please try again later`)
@@ -263,6 +264,7 @@ export const SurveyFormContextProvider = ({ children }) => {
         const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
         if(data.success){
           resetSurvetForm()
+          setUpdate('added')
           return alertMessage('Success', 'Survey form submitted successfully', navigation)
         }else{
           return alertMessage('Failed', `Failed to submit survey form, please try again later`)
