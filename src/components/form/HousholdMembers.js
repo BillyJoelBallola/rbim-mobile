@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Alert, ScrollView, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 
 import CustomTitle from '../CustomTitle'

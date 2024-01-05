@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Ionicons } from '@expo/vector-icons';
 import {
   View,
   Text,
@@ -71,6 +72,9 @@ const CustomDropdown = ({ data, selected, onSelect, label, disabled }) => {
         >
           <View style={styles.centeredModal}>
             <View style={styles.modalContainer}>
+              <TouchableOpacity style={{ alignSelf: 'flex-end' }} onPress={() => setModalVisible(false)}>
+                <Ionicons name='close-sharp' size={30} color={'#008605'}/>
+              </TouchableOpacity>
               <FlatList
                 data={data}
                 keyExtractor={(item) => item.responseCode}
