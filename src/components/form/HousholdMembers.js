@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { ScrollView, View } from 'react-native'
+import { Alert, ScrollView, View } from 'react-native'
 import { SurveyFormContext } from '../../context/SurveryFormContext'
 
 import CustomTitle from '../CustomTitle'
@@ -11,6 +11,18 @@ import CustomCancelButton from '../CustomCancelButton';
 
 const HousholdMembers = ({ navigation }) => {
   const { membersData, handleInputChange } = useContext(SurveyFormContext)
+
+  const disbableField = (idx) => {
+    let isDisable;
+
+    if(membersData[idx].questionsAndAnswer.length <= 0){
+      isDisable = false  
+    }else{
+     isDisable = true 
+    }
+
+    return isDisable
+  }
 
   return (
     <ScrollView>
@@ -27,6 +39,7 @@ const HousholdMembers = ({ navigation }) => {
           <View key={idx}>
             <HeightSpacer size={10}/>
             <CustomInput 
+              disabled={idx !== 0 ? disbableField(idx - 1) : true}
               label={`#${idx + 1} Member`} 
               placeholder={'Surname, First Name, Middle Name/Initial'} 
               value={member.questionsAndAnswer[0] || ''} 
