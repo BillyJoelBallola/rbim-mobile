@@ -105,7 +105,17 @@ export const SurveyFormContextProvider = ({ children }) => {
       [
         {
           text: "Ok",
-          onPress: () =>  navigation ? navigation.navigate('Home') : ''
+          onPress: () =>  {
+            if(navigation !== '' || navigation !== undefined){
+              if(navigation === 'add' || navigation === 'changes' || navigation === 'error'){
+                resetSurvetForm()
+                setSurveyFormId(null)
+                navigation.navigate('Home')
+              }
+            }else{
+              return ''
+            }
+          }
         }
       ]
     );
@@ -238,14 +248,13 @@ export const SurveyFormContextProvider = ({ children }) => {
       try {
         const { data } = await apiClient.put('/survey_form', { household, surveyForm, questionsAndResponses })
         if(data.success){
-          resetSurvetForm()
           setUpdate('changes')
-          return alertMessage('Success', 'Survey form saved changes successfully', navigation)
+          return alertMessage('Success', 'Survey form saved changes successfully', 'changes')
         }else{
           return alertMessage('Failed', `Failed to save changes of survey form, please try again later`)
         }
       } catch (error) {
-        return alertMessage('Failed', 'An unexpected error occurred. Please try again later', navigation)
+        return alertMessage('Failed', 'An unexpected error occurred. Please try again later', 'error')
       } finally {
         setLoading(false)
       }
@@ -263,14 +272,13 @@ export const SurveyFormContextProvider = ({ children }) => {
       try {
         const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
         if(data.success){
-          resetSurvetForm()
           setUpdate('added')
-          return alertMessage('Success', 'Survey form submitted successfully', navigation)
+          return alertMessage('Success', 'Survey form submitted successfully', 'add')
         }else{
           return alertMessage('Failed', `Failed to submit survey form, please try again later`)
         }
       } catch (error) {
-        return alertMessage('Failed', 'An unexpected error occurred. Please try again later', navigation)
+        return alertMessage('Failed', 'An unexpected error occurred. Please try again later', 'error')
       } finally {
         setLoading(false)
       }
