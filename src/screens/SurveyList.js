@@ -8,6 +8,7 @@ import CustomInput from '../components/CustomInput'
 import HeightSpacer from '../components/spacer/HeightSpacer'
 import { Divider } from 'react-native-paper'
 import { SurveyFormContext } from '../context/SurveryFormContext';
+import { useUser } from '../context/UserContext';
 
 const SurveyFormInfo = ({formId, navigation, respondent, address, address_id, firstVisitDate, secondVisitDate, firstVisitResult, secondVisitResult}) => {
   const filteredAddress = address?.find(item => item.id === address_id)
@@ -50,6 +51,7 @@ const SurveyFormInfo = ({formId, navigation, respondent, address, address_id, fi
 }
 
 const SurveyList = ({ navigation }) => {
+  const { user } = useUser()
   const [surveyForms, setSurveyForms] = useState([])
   const [address, setAddress] = useState([])
   const [query, setQuery] = useState('')
@@ -65,7 +67,10 @@ const SurveyList = ({ navigation }) => {
     const fetchSurveyForms = async () => {
       const { data } = await apiClient.get('/survey_forms')
       if(data.success){
-        const currentForms = data.data.filter(item => item.first_visit_date.includes(currentYear))
+        const currentForms = data.data.filter(item => (
+          moment(item?.date_encoded).format('ll')?.toString()?.includes(currentYear) &&
+          item?.address?.toString() === user?.address_id?.toString()
+        ));
         setSurveyForms(currentForms)
       }
     }
@@ -83,7 +88,7 @@ const SurveyList = ({ navigation }) => {
   return (
     <View style={styles.root}>
       <Text style={{ fontSize: 34, fontWeight: 600 }}>Search</Text>
-      <Text style={{ fontSize: 14 }}>The list of available survey forms includes only those conducted in the current year.</Text>
+      <Text style={{ fontSize: 14 }}>The list of available survey forms includes only those conducted in the barangay and current year.</Text>
       
       <HeightSpacer size={20}/>
 

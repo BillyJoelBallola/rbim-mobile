@@ -73,8 +73,12 @@ const Identification = ({ navigation }) => {
           value={household?.household_member_no || ''} 
           setValue={(value) => setHousehold(current => ({...current, household_member_no: value}))}/>
         <HeightSpacer size={10}/>
-        <CustomGeneralDropdown data={address} 
-          label={'Barangay, Municipal, Province'} selected={household?.address || ''} onSelect={(value) => setHousehold(current => ({...current, address: value}))}/>
+        <CustomGeneralDropdown 
+          disabled={true}
+          data={address} 
+          label={'Barangay, Municipal, Province'}
+          selected={household?.address || ''} 
+          onSelect={(value) => setHousehold(current => ({...current, address: value}))}/>
         <HeightSpacer size={10}/>
         <CustomInput 
           label={'Room/Floor/Unit No. and Building Name'} 

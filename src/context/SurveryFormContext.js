@@ -61,12 +61,19 @@ export const SurveyFormContextProvider = ({ children }) => {
   })
 
   useEffect(() => {
-    setSurveyForm(current => ({
-      ...current,
-      date_encoded: new Date(),
-      encoder_name: user?.name,
-      supervisor_name: 'Secretary',
-    }))
+    if(user){
+      setSurveyForm(current => ({
+        ...current,
+        date_encoded: new Date(),
+        encoder_name: user?.name,
+        supervisor_name: 'Secretary',
+      }))
+  
+      setHousehold(current => ({
+        ...current,
+        address: user?.address_id
+      }))
+    }
   }, [user])
 
   const membersData = [
@@ -96,29 +103,6 @@ export const SurveyFormContextProvider = ({ children }) => {
     }
     
     return result
-  }
-
-  const alertMessage = (title, message, navigation) => {
-    Alert.alert(
-      title, 
-      message,
-      [
-        {
-          text: "Ok",
-          onPress: () =>  {
-            if(navigation !== '' || navigation !== undefined){
-              if(navigation === 'add' || navigation === 'changes' || navigation === 'error'){
-                resetSurvetForm()
-                setSurveyFormId(null)
-                navigation.navigate('Home')
-              }
-            }else{
-              return ''
-            }
-          }
-        }
-      ]
-    );
   }
 
   const handleInputChange = (index, value, array, onChange) => {
@@ -176,6 +160,26 @@ export const SurveyFormContextProvider = ({ children }) => {
     })
   }
 
+  const alertMessage = (title, message, navigation) => {
+    Alert.alert(
+      title, 
+      message,
+      [
+        {
+          text: "Ok",
+          onPress: () => {    
+            if(navigation){
+              setSurveyFormId(null)
+              navigation.navigate('Home')
+            }else{
+              return ''
+            }
+          }
+        }
+      ]
+    );
+  }
+
   const cancelSurveyForm = (navigation) => {
     Alert.alert(
       'Cancel', 
@@ -197,7 +201,18 @@ export const SurveyFormContextProvider = ({ children }) => {
   }
 
   const submitForm = async (navigation, setLoading) => {
-    const questionsAndResponses = [
+    const questionsAndResponses = surveyFormId ? [
+      questionsAndAnswerMember1,
+      questionsAndAnswerMember2,
+      questionsAndAnswerMember3,
+      questionsAndAnswerMember4,
+      questionsAndAnswerMember5,
+      questionsAndAnswerMember6,
+      questionsAndAnswerMember7,
+      questionsAndAnswerMember8,
+      questionsAndAnswerMember9,
+      questionsAndAnswerMember10
+    ] : [
       addMemberNumber(questionsAndAnswerMember1, 1),
       addMemberNumber(questionsAndAnswerMember2, 2),
       addMemberNumber(questionsAndAnswerMember3, 3),
@@ -225,7 +240,7 @@ export const SurveyFormContextProvider = ({ children }) => {
 
     if(surveyFormId){
 
-      if (Object.values(surveyForm).filter((response, idx) => idx >= 7 && idx <= 13).some(response => response === '' || response?.includes('0'))) {
+      if (Object.values(surveyForm).filter((response, idx) => idx >= 7 && idx <= 13).some(response => response === '')) {
         return alertMessage('Failed', "Survey Information (Second Visit): Submission failed, don't leave empty fields.");
       }
 
@@ -249,12 +264,12 @@ export const SurveyFormContextProvider = ({ children }) => {
         const { data } = await apiClient.put('/survey_form', { household, surveyForm, questionsAndResponses })
         if(data.success){
           setUpdate('changes')
-          return alertMessage('Success', 'Survey form saved changes successfully', 'changes')
+          return alertMessage('Success', 'Survey form saved changes successfully', navigation)
         }else{
           return alertMessage('Failed', `Failed to save changes of survey form, please try again later`)
         }
       } catch (error) {
-        return alertMessage('Failed', 'An unexpected error occurred. Please try again later', 'error')
+        return alertMessage('Failed', 'An unexpected error occurred. Please try again later')
       } finally {
         setLoading(false)
       }
@@ -273,12 +288,13 @@ export const SurveyFormContextProvider = ({ children }) => {
         const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
         if(data.success){
           setUpdate('added')
-          return alertMessage('Success', 'Survey form submitted successfully', 'add')
+          resetSurvetForm()
+          return alertMessage('Success', 'Survey form submitted successfully', navigation)
         }else{
           return alertMessage('Failed', `Failed to submit survey form, please try again later`)
         }
       } catch (error) {
-        return alertMessage('Failed', 'An unexpected error occurred. Please try again later', 'error')
+        return alertMessage('Failed', 'An unexpected error occurred. Please try again later')
       } finally {
         setLoading(false)
       }
