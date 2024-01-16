@@ -15,7 +15,7 @@ import CustomButton from '../CustomButton'
 import CustomCancelButton from '../CustomCancelButton';
 
 const Identification = ({ navigation }) => {
-  const { household, setHousehold } = useContext(SurveyFormContext)
+  const { household, setHousehold, surveyForm, setSurveyForm } = useContext(SurveyFormContext)
   const [address, setAddress] = useState([])
   const radioBtnData = [
     {
@@ -33,6 +33,20 @@ const Identification = ({ navigation }) => {
       setAddress(data.data)
     })
   }, [])
+
+  const handleContinueBtn = () => {
+    const date = new Date();
+
+    if(surveyForm?.second_visit_date === '0000-00-00' || surveyForm?.second_visit_date === null){
+      setSurveyForm(current => ({
+        ...current, 
+        second_visit_date: date,
+        second_visit_time_start: date,
+      }))
+    }
+
+    navigation.navigate('SurveyForm', { tab: 3 })
+  }
 
   return (
     <ScrollView style={{ flexDirection: 'column', gap: 10 }}>
@@ -98,10 +112,16 @@ const Identification = ({ navigation }) => {
           value={household?.street || ''} 
           setValue={(value) => setHousehold(current => ({...current, street: value}))}/>
         <HeightSpacer size={10}/>
+        <CustomInput 
+          label={'Phone Number'} 
+          placeholder={'Phone Number'} 
+          value={household?.phone_no || ''} 
+          setValue={(value) => setHousehold(current => ({...current, phone_no: value}))}/>
+        <HeightSpacer size={10}/>
       </View> 
 
       <HeightSpacer size={10}/>
-      <CustomButton text={"NEXT"} onPress={() => navigation.navigate('SurveyForm', { tab: 3 })}/>
+      <CustomButton text={"NEXT"} onPress={handleContinueBtn}/>
     </ScrollView>
   )
 }

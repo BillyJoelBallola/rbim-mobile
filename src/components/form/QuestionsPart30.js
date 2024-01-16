@@ -11,9 +11,11 @@ import CustomInput from '../CustomInput'
 import CustomDatePicker from '../CustomDatePicker'
 import Divider from '../Divider'
 import CustomCancelButton from '../CustomCancelButton'
+import { UserContext } from '../../context/UserContext'
 
 const QuestionsPart30 = ({ navigation }) => {
   const { surveyForm, setSurveyForm, surveyFormId } = useContext(SurveyFormContext)
+  const { user } = useContext(UserContext)
 
   return (
     <ScrollView>
@@ -49,14 +51,14 @@ const QuestionsPart30 = ({ navigation }) => {
       <View style={styles.column}>
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
-            disabled={surveyFormId ? true : false}
+            disabled={true}
             selectedDate={surveyForm?.first_visit_date ? new Date(surveyForm?.first_visit_date ) : null}
             onDateChange={value => setSurveyForm(current => ({...current, first_visit_date: value}))}
           />
         </View>
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
-            disabled={!surveyFormId ? true : false}
+            disabled={true}
             selectedDate={surveyForm?.second_visit_date && surveyForm?.second_visit_date !== '0000-00-00' ? new Date(surveyForm?.second_visit_date ) : null}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_date: value}))}
           />
@@ -76,7 +78,7 @@ const QuestionsPart30 = ({ navigation }) => {
       <View style={styles.column}>
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
-            disabled={surveyFormId ? true : false}
+            disabled={true}
             selectedDate={surveyForm?.first_visit_time_start ? new Date(surveyForm?.first_visit_time_start) : null}
             onDateChange={value => setSurveyForm(current => ({...current, first_visit_time_start: value}))}
             mode={'time'}
@@ -85,7 +87,7 @@ const QuestionsPart30 = ({ navigation }) => {
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
             mode={'time'}
-            disabled={!surveyFormId ? true : false}
+            disabled={true}
             selectedDate={surveyForm?.second_visit_time_start && surveyForm?.second_visit_time_start !== '00:00:00' ? new Date(surveyForm?.second_visit_time_start) : null}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_time_start: value}))}
           />
@@ -105,7 +107,7 @@ const QuestionsPart30 = ({ navigation }) => {
       <View style={styles.column}>
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
-            disabled={surveyFormId ? true : false}
+            disabled={true}
             selectedDate={surveyForm?.first_visit_time_end ? new Date(surveyForm?.first_visit_time_end) : null}
             onDateChange={value => setSurveyForm(current => ({...current, first_visit_time_end: value}))}
             mode={'time'}
@@ -114,7 +116,7 @@ const QuestionsPart30 = ({ navigation }) => {
         <View style={{ width: '49%' }}>
           <CustomDatePicker 
             mode={'time'}
-            disabled={!surveyFormId ? true : false}
+            disabled={true}
             selectedDate={surveyForm?.second_visit_time_end && surveyForm?.second_visit_time_end !== '00:00:00' ? new Date(surveyForm?.second_visit_time_end) : null}
             onDateChange={value => setSurveyForm(current => ({...current, second_visit_time_end: value}))}
           />
@@ -126,7 +128,7 @@ const QuestionsPart30 = ({ navigation }) => {
       <HeightSpacer size={10}/>
       <View style={styles.column}>
         <View style={{ width: '100%' }}>
-          <Text style={{ fontWeight: '600' }}>Result</Text>
+          <Text style={{ fontWeight: '600' }}>Result*</Text>
         </View>
       </View>
 
@@ -155,7 +157,7 @@ const QuestionsPart30 = ({ navigation }) => {
       <HeightSpacer size={10}/>
       <View style={styles.column}>
         <View style={{ width: '100%' }}>
-          <Text style={{ fontWeight: '600' }}>Date of Next Visit</Text>
+          <Text style={{ fontWeight: '600' }}>Date of Next Visit*</Text>
         </View>
       </View>
 
@@ -182,7 +184,7 @@ const QuestionsPart30 = ({ navigation }) => {
       <HeightSpacer size={10}/>
       <View style={styles.column}>
         <View style={{ width: '100%' }}>
-          <Text style={{ fontWeight: '600' }}>Name of Interviewer</Text>
+          <Text style={{ fontWeight: '600' }}>Name of Interviewer*</Text>
         </View>
       </View>
 
@@ -191,7 +193,7 @@ const QuestionsPart30 = ({ navigation }) => {
         <View style={{ width: '49%' }}>
           <CustomInput 
             disabled={surveyFormId ? false : true}
-            value={surveyForm?.first_visit_interviewer}
+            value={surveyForm?.first_visit_interviewer || user?.name}
             setValue={value => setSurveyForm(current => ({...current, first_visit_interviewer: value}))}
             placeholder={'Type here'}
           />
@@ -199,7 +201,7 @@ const QuestionsPart30 = ({ navigation }) => {
         <View style={{ width: '49%' }}>
           <CustomInput 
             disabled={!surveyFormId ? false : true}
-            value={surveyForm?.second_visit_interviewer}
+            value={surveyForm?.second_visit_interviewer || user?.name}
             setValue={value => setSurveyForm(current => ({...current, second_visit_interviewer: value}))}
             placeholder={'Type here'}
           />
@@ -211,7 +213,7 @@ const QuestionsPart30 = ({ navigation }) => {
       <HeightSpacer size={10}/>
       <View style={styles.column}>
         <View style={{ width: '100%' }}>
-          <Text style={{ fontWeight: '600' }}>Name of Supervisor</Text>
+          <Text style={{ fontWeight: '600' }}>Name of Supervisor*</Text>
         </View>
       </View>
 

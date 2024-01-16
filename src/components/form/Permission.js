@@ -1,10 +1,17 @@
 import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native'
+import { useContext } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import CustomCheckBox from '../CustomCheckBox'
-import CustomButton from '../CustomButton'
-import HeightSpacer from '../spacer/HeightSpacer'
+import CustomCheckBox from '../CustomCheckBox';
+import CustomButton from '../CustomButton';
+import HeightSpacer from '../spacer/HeightSpacer';
+import { SurveyFormContext } from '../../context/SurveryFormContext';
+import moment from 'moment';
 
 const Permission = ({ checked, setChecked, navigation }) => {
+  const { surveyForm, setSurveyForm } = useContext(SurveyFormContext)
+
+  // console.log(JSON.stringify(surveyForm, null, 2))
+
   const alertMessage = () => {
     Alert.alert(
       'Failed', 
@@ -12,6 +19,24 @@ const Permission = ({ checked, setChecked, navigation }) => {
       [{text: 'OK'}],
       {cancelable: true}
     );
+  }
+
+  const handleContinueBtn = () => {
+    const date = new Date();
+
+    if(!checked){
+      return alertMessage()
+    }
+
+    if(surveyForm?.first_visit_date === '' || surveyForm?.first_visit_date === null){
+      setSurveyForm(current => ({
+        ...current, 
+        first_visit_date: date,
+        first_visit_time_start: date,
+      }))
+    }
+
+    navigation.navigate('SurveyForm', { tab: 2 })
   }
 
   return (
@@ -30,7 +55,7 @@ const Permission = ({ checked, setChecked, navigation }) => {
         </View>
         <View style={{ marginBottom: 60 }}>
           <CustomCheckBox setChecked={setChecked} checked={checked} label={"Pinahihintulutan ang panayam"}/>
-          <CustomButton text={'CONTINUE'} onPress={() => checked ? navigation.navigate('SurveyForm', { tab: 2 }) : alertMessage() }/>
+          <CustomButton text={'CONTINUE'} onPress={handleContinueBtn}/>
           <HeightSpacer size={10} />
         </View>
       </View>

@@ -87,6 +87,7 @@ const SurveyFormScreen = ({ navigation, route }) => {
           unit_no: response[0]?.unit_no?.toString(),
           house_no: response[0]?.house_no?.toString(),
           street: response[0]?.street?.toString(),
+          phone_no: response[0]?.phone_no?.toString(),
         })
         for(let i = 0; i < membersData.length; i++){
           membersData[i]?.setQuestionAndAnswer(getQuestionsAndResponsesOfMember(response, i + 1))

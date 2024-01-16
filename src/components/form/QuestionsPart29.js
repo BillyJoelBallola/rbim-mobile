@@ -12,7 +12,7 @@ import CustomInput from '../CustomInput'
 import CustomCancelButton from '../CustomCancelButton'
 
 const QuestionsPart29 = ({ navigation}) => {
-  const { membersData, handleInputChange } = useContext(SurveyFormContext)
+  const { membersData, handleInputChange, surveyForm, setSurveyForm } = useContext(SurveyFormContext)
   const { questions }  = useContext(QuestionsContext)
     
   const question45Data = questions['Q45']
@@ -25,6 +25,24 @@ const QuestionsPart29 = ({ navigation}) => {
   const question51Data = questions['Q51']
   const question52Data = questions['Q52']
   const question53Data = questions['Q53']
+
+  const handleContinueBtn = () => {
+    const date = new Date();
+
+    if(surveyForm?.first_visit_date !== '' && surveyForm?.first_visit_time_end === '' || surveyForm?.first_visit_time_end === null){
+      setSurveyForm(current => ({
+        ...current,
+        first_visit_time_end: date,
+      }))
+    }else if(surveyForm?.second_visit_date !== '' && surveyForm?.first_visit_time_end !== ''){
+      setSurveyForm(current => ({
+        ...current,
+        second_visit_time_end: date,
+      }))
+    }
+
+    navigation.navigate('SurveyForm', { tab: 33 })
+  }
 
   return (
     <ScrollView>
@@ -362,7 +380,7 @@ const QuestionsPart29 = ({ navigation}) => {
       </View>
 
       <HeightSpacer size={20}/>
-      <CustomButton text={"NEXT"} onPress={() => navigation.navigate('SurveyForm', { tab: 33 })}/>
+      <CustomButton text={"NEXT"} onPress={handleContinueBtn}/>
       <HeightSpacer size={10}/>
       <CustomButton text={"PREVIOUS"} bgColor={"#808080"} onPress={() => navigation.navigate('SurveyForm', { tab: 31 })} />
     </ScrollView>
