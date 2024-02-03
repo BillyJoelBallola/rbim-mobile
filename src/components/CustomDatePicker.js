@@ -38,10 +38,10 @@ const CustomDatePicker = ({ selectedDate, onDateChange, mode = 'date', disabled 
           <DisplayText />
         </Text>
       </TouchableOpacity>
-
       {showDatePicker && (
         <DateTimePicker
           mode={mode === 'time' ? 'time' : 'date'}
+          display='spinner'
           value={defaultDate}
           onChange={onDateChangeHandler}
         />
