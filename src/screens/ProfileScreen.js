@@ -9,11 +9,13 @@ import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 
 const ProfileScreen = ({ navigation }) => {
-  const { user } = useUser()
+  const { user, setUpdate } = useUser()
   const [address, setAddress] = useState([])
+  const [newUsername, setNewUsername] = useState(user?.username)
   const [currentPassword, setCurrentPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
+  const [activeTab, setActiveTab] = useState(1)
 
   useEffect(() => {
     apiClient.get("/address").then(({ data }) => {
@@ -32,29 +34,52 @@ const ProfileScreen = ({ navigation }) => {
   }
 
   const saveChanges = async () => {
-    if(currentPassword === '' || confirmPassword === '' || newPassword === ''){
-      return alertMessage('Failed', 'Fill up all fields.')
-    }
+    if(activeTab === 1){
+      if(newUsername === ''){
+        return alertMessage('Failed', 'Fill up all fields.')
+      }
 
-    if(confirmPassword !== newPassword){
-      return alertMessage("Failed", "Password did not match")
-    }
-
-    if(newPassword.length < 5){
-      return alertMessage("Failed", "Password must be 5 characters or more")
-    }
-
-    const securityData = { currentPassword, confirmPassword, newPassword, id: user?.id }
-
-    const { data } = await apiClient.put("/user/mobile/security", securityData)
-
-    if(data.success){
-      setCurrentPassword('')
-      setConfirmPassword('')
-      setNewPassword('')
-      return alertMessage("Success", data.message)
-    }else{
-      return alertMessage('Failed', data.message)
+      if(newUsername.length < 5){
+        return alertMessage("Failed", "Password must be 5 characters or more")
+      }
+  
+      const informationData = { username: newUsername, id: user?.id }
+  
+      const { data } = await apiClient.put("/user/mobile/information", informationData)
+  
+      if(data.success){
+        setNewPassword('')
+        setUpdate('updated')
+        return alertMessage("Success", data.message)
+      }else{
+        return alertMessage('Failed', data.message)
+      }
+    }else if(activeTab === 2){
+      if(currentPassword === '' || confirmPassword === '' || newPassword === ''){
+        return alertMessage('Failed', 'Fill up all fields.')
+      }
+  
+      if(confirmPassword !== newPassword){
+        return alertMessage("Failed", "Password did not match")
+      }
+  
+      if(newPassword.length < 5){
+        return alertMessage("Failed", "Password must be 5 characters or more")
+      }
+  
+      const securityData = { currentPassword, confirmPassword, newPassword, id: user?.id }
+  
+      const { data } = await apiClient.put("/user/mobile/security", securityData)
+  
+      if(data.success){
+        setCurrentPassword('')
+        setConfirmPassword('')
+        setNewPassword('')
+        setUpdate('updated')
+        return alertMessage("Success", data.message)
+      }else{
+        return alertMessage('Failed', data.message)
+      }
     }
   }
 
@@ -76,40 +101,81 @@ const ProfileScreen = ({ navigation }) => {
       </View>
 
       <HeightSpacer size={20}/>
-
-      <View>
-        <Text style={{ fontSize: 18, fontWeight: 400 }}>Security</Text>
-
-        <HeightSpacer size={5}/>
-
-        <CustomInput
-          secureTextEntry={true}
-          label={'Current Password'}
-          placeholder={"**********"}
-          value={currentPassword} 
-          setValue={setCurrentPassword}
-        />
-
-        <HeightSpacer size={10}/>
-
-        <CustomInput
-          secureTextEntry={true}
-          label={'Confirm Password'}
-          placeholder={"**********"}
-          value={confirmPassword} 
-          setValue={setConfirmPassword}
-        />
-
-        <HeightSpacer size={10}/>
-
-        <CustomInput
-          secureTextEntry={true}
-          label={'New Password'}
-          placeholder={"**********"}
-          value={newPassword} 
-          setValue={setNewPassword}
-        />
+      
+      <View style={{ flexDirection: 'row', gap: 6 }}>
+        <TouchableOpacity 
+          style={[
+            styles.buttonStyle, 
+            { backgroundColor: activeTab === 1 ? 'gray' : 'transparent' }
+          ]}
+          onPress={() => setActiveTab(1)}
+        >
+          <Text style={{ color: activeTab === 1 ? 'white' : 'black' }}>Information</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          style={[
+            styles.buttonStyle, 
+            { backgroundColor: activeTab === 2 ? 'gray' : 'transparent' }
+          ]}
+          onPress={() => setActiveTab(2)}
+        >
+          <Text style={{ color: activeTab === 2 ? 'white' : 'black' }}>Security</Text>
+        </TouchableOpacity>
       </View>
+
+      <HeightSpacer size={20}/>
+        
+      
+      {
+        activeTab === 1 ?
+        <View>
+          <Text style={{ fontSize: 18, fontWeight: 400 }}>Information</Text>
+
+          <HeightSpacer size={5}/>
+
+          <CustomInput
+            label={'New Username'}
+            placeholder={"Username"}
+            value={newUsername} 
+            setValue={setNewUsername}
+          />
+
+        </View>
+        :
+        <View>
+          <Text style={{ fontSize: 18, fontWeight: 400 }}>Security</Text>
+
+          <HeightSpacer size={5}/>
+
+          <CustomInput
+            secureTextEntry={true}
+            label={'Current Password'}
+            placeholder={"**********"}
+            value={currentPassword} 
+            setValue={setCurrentPassword}
+          />
+
+          <HeightSpacer size={10}/>
+
+          <CustomInput
+            secureTextEntry={true}
+            label={'Confirm Password'}
+            placeholder={"**********"}
+            value={confirmPassword} 
+            setValue={setConfirmPassword}
+          />
+
+          <HeightSpacer size={10}/>
+
+          <CustomInput
+            secureTextEntry={true}
+            label={'New Password'}
+            placeholder={"**********"}
+            value={newPassword} 
+            setValue={setNewPassword}
+          />
+        </View>
+      }
 
       <HeightSpacer size={20}/>
 
@@ -125,6 +191,13 @@ const styles = StyleSheet.create({
     paddingVertical: 50,
     height: '100%',
     backgroundColor: '#fff'
+  },
+  buttonStyle: { 
+    borderWidth: 1, 
+    borderColor: 'gray', 
+    paddingHorizontal: 14, 
+    paddingVertical: 4, 
+    borderRadius: 5 
   }
 })
 

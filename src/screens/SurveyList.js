@@ -57,7 +57,7 @@ const SurveyList = ({ navigation }) => {
   const [query, setQuery] = useState('')
 
   const date = new Date()
-  const currentYear = date.toString().slice(11, 15)
+  const currentYear = date.getFullYear()
 
   const filteredData = surveyForms.filter(item => {
     return item?.respondent_name?.toLowerCase()?.includes(query.toLowerCase())
@@ -68,7 +68,7 @@ const SurveyList = ({ navigation }) => {
       const { data } = await apiClient.get('/survey_forms')
       if(data.success){
         const currentForms = data.data.filter(item => (
-          moment(item?.date_encoded).format('ll')?.toString()?.includes(currentYear) &&
+          item?.date_encoded.includes(currentYear) &&
           item?.address?.toString() === user?.address_id?.toString()
         ));
         setSurveyForms(currentForms)
