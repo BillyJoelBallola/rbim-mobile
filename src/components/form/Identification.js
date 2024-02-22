@@ -67,7 +67,7 @@ const Identification = ({ navigation }) => {
           setValue={(value) => setHousehold(current => ({...current, living_type: value}))} radioBtnData={radioBtnData} />
         <HeightSpacer size={20}/>
 
-        <CustomTitle text={"A. IDENTIDICATION"} size={16} />
+        <CustomTitle text={"A. IDENTIFICATION"} size={16} />
         <HeightSpacer size={10}/>
         <CustomInput 
           label={'Repondents Name'} 
