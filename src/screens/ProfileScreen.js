@@ -188,7 +188,7 @@ const ProfileScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   root: {
     paddingHorizontal: 20,
-    paddingVertical: 50,
+    paddingVertical: 20,
     height: '100%',
     backgroundColor: '#fff'
   },

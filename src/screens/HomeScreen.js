@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     paddingHorizontal: 20,
-    paddingVertical: 70,
+    paddingVertical: 20,
   },
   bottomContainer: {
     paddingHorizontal: 20,
