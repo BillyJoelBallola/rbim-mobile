@@ -237,7 +237,7 @@ export const SurveyFormContextProvider = ({ children }) => {
       Object.values(surveyForm).filter((response, idx) => idx >= 0 && idx <= 6).some(response => response === '') &&
       Object.values(surveyForm).filter((response, idx) => idx >= 7 && idx <= 13).some(response => response === '') 
     ) {
-      return alertMessage('Failed', "Survey Information: Submission failed, don't leave empty fields.");
+      return alertMessage('Failed', "Survey Information (First Visit): Submission failed, don't leave empty fields.");
     }
 
     if(surveyFormId){
@@ -263,7 +263,7 @@ export const SurveyFormContextProvider = ({ children }) => {
       }
 
       try {
-        const { data } = await apiClient.put('/survey_form', { household, surveyForm, questionsAndResponses })
+        const { data } = await apiClient.put('/survey_form', { household, surveyForm: {...surveyForm, second_visit_interviewer: user?.name}, questionsAndResponses })
         if(data.success){
           setUpdate('changes')
           return alertMessage('Success', 'Survey form saved changes successfully', navigation)
@@ -287,7 +287,7 @@ export const SurveyFormContextProvider = ({ children }) => {
       }   
       
       try {
-        const { data } = await apiClient.post('/survey_form', { household, surveyForm, questionsAndResponses })
+        const { data } = await apiClient.post('/survey_form', { household, surveyForm: {...surveyForm, first_visit_interviewer: user?.name}, questionsAndResponses })
         if(data.success){
           setUpdate('added')
           resetSurvetForm()
@@ -303,8 +303,6 @@ export const SurveyFormContextProvider = ({ children }) => {
 
     }
   }
-
-  // console.log(JSON.stringify(surveyForm, null, 2));
 
   return (
     <SurveyFormContext.Provider 
