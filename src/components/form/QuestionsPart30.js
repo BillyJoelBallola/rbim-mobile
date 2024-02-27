@@ -193,7 +193,7 @@ const QuestionsPart30 = ({ navigation }) => {
         <View style={{ width: '49%' }}>
           <CustomInput 
             disabled={surveyFormId ? false : true}
-            value={surveyForm?.first_visit_interviewer || user?.name}
+            value={surveyForm?.first_visit_interviewer}
             setValue={value => setSurveyForm(current => ({...current, first_visit_interviewer: value}))}
             placeholder={'Type here'}
           />
@@ -201,7 +201,7 @@ const QuestionsPart30 = ({ navigation }) => {
         <View style={{ width: '49%' }}>
           <CustomInput 
             disabled={!surveyFormId ? false : true}
-            value={surveyForm?.second_visit_interviewer || user?.name}
+            value={surveyForm?.second_visit_interviewer}
             setValue={value => setSurveyForm(current => ({...current, second_visit_interviewer: value}))}
             placeholder={'Type here'}
           />

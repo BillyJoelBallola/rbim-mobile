@@ -68,6 +68,8 @@ export const SurveyFormContextProvider = ({ children }) => {
         date_encoded: new Date(),
         encoder_name: user?.name,
         supervisor_name: 'Secretary',
+        first_visit_interviewer: user?.name,
+        second_visit_interviewer: user?.name
       }))
   
       setHousehold(current => ({
@@ -226,18 +228,11 @@ export const SurveyFormContextProvider = ({ children }) => {
       addMemberNumber(questionsAndAnswerMember9, 9),
       addMemberNumber(questionsAndAnswerMember10, 10)
     ]
-
+    
     const filledArrayResponses = questionsAndResponses.filter(array => array.length > 0)
-
+    
     if (Object.values(household)?.some(answer => answer === '')) {
       return alertMessage('Failed', "Household Information: Submission failed, don't leave empty fields.");
-    }
-    
-    if (
-      Object.values(surveyForm).filter((response, idx) => idx >= 0 && idx <= 6).some(response => response === '') &&
-      Object.values(surveyForm).filter((response, idx) => idx >= 7 && idx <= 13).some(response => response === '') 
-    ) {
-      return alertMessage('Failed', "Survey Information (First Visit): Submission failed, don't leave empty fields.");
     }
 
     if(surveyFormId){
@@ -277,15 +272,14 @@ export const SurveyFormContextProvider = ({ children }) => {
       }
 
     }else{
-
       if(filledArrayResponses.length <= 0){
         return alertMessage('Failed', "Household Members: Survey form must have atleast one[1] HH members.");
       }
 
       if(Object.values(surveyForm).filter((key, idx) => idx >= 0 && idx <= 6).some(response => response === '')){
         return alertMessage('Failed', "Survey Information (First Visit): Submission failed, don't leave empty fields.");
-      }   
-      
+      }
+
       try {
         const { data } = await apiClient.post('/survey_form', { household, surveyForm: {...surveyForm, first_visit_interviewer: user?.name}, questionsAndResponses })
         if(data.success){
