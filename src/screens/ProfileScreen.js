@@ -159,21 +159,22 @@ const ProfileScreen = ({ navigation }) => {
 
           <CustomInput
             secureTextEntry={true}
-            label={'Confirm Password'}
+            label={'New Password'}
             placeholder={"**********"}
-            value={confirmPassword} 
-            setValue={setConfirmPassword}
+            value={newPassword} 
+            setValue={setNewPassword}
           />
 
           <HeightSpacer size={10}/>
 
           <CustomInput
             secureTextEntry={true}
-            label={'New Password'}
+            label={'Confirm Password'}
             placeholder={"**********"}
-            value={newPassword} 
-            setValue={setNewPassword}
+            value={confirmPassword} 
+            setValue={setConfirmPassword}
           />
+          
         </View>
       }
 

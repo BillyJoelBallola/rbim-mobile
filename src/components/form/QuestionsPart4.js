@@ -32,7 +32,7 @@ const QuestionsPart4 = ({ showSideBar, navigation }) => {
           <TextQuestion questionNo={questionEightData.questionCode} questionText={questionEightData.questionText} />
         </View>
         <View style={{ width: '40%' }}>
-          <TextQuestion questionNo={'Q9'} questionText={"What is the religio of __?"} />
+          <TextQuestion questionNo={'Q9'} questionText={"What is the religion of __?"} />
         </View>
       </View>
 
